@@ -5,13 +5,16 @@ import AnimatedHeadingComponent from '../../ui/AnimatedHeading/AnimatedHeadingCo
 import ButtonComponent from '../../ui/Button/ButtonComponent';
 import HeartbeatComponent from '../../ui/Heartbeat/HeartbeatComponent';
 import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
-import PhotoPlaceholderComponent from '../../ui/PhotoPlaceholder/PhotoPlaceholderComponent';
+import PhotoComponent from '../../ui/Photo/PhotoComponent';
 import RevealComponent from '../../ui/Reveal/RevealComponent';
 import { obtenerUrlInstagram } from '../../../data/equipo';
+import { fotoPersona } from '../../../data/fotos';
 import { enterOrder, parallaxOffset } from '../../../theme/animation';
 import { toneStyles } from '../../../theme/toneStyles';
 import type { IProfileIntroProps } from './IProfileIntroProps';
 
+
+const PROFILE_PHOTO_SIZES = '(min-width: 768px) 480px, 100vw';
 
 const ProfileIntroComponent = ({ persona, contentAnchor }: IProfileIntroProps) => {
   // #region Declaraciones
@@ -52,7 +55,14 @@ const ProfileIntroComponent = ({ persona, contentAnchor }: IProfileIntroProps) =
 
         <div className="entra relative mx-auto w-full max-w-md md:max-w-none" style={enterOrder(3)}>
           <div className="paralaje" style={parallaxOffset(-24)}>
-            <PhotoPlaceholderComponent label={`Foto de ${persona.nombre}`} tone={persona.tono} className="aspect-[4/5] rounded-[2rem] shadow-2xl" />
+            <PhotoComponent
+              photo={fotoPersona(persona)}
+              label={persona.nombre}
+              tone={persona.tono}
+              sizes={PROFILE_PHOTO_SIZES}
+              priority
+              className="aspect-[4/5] rounded-[2rem] shadow-2xl"
+            />
           </div>
           <div className="absolute -bottom-5 left-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-6">
             <span className="grid size-10 place-items-center rounded-full bg-corazon-claro text-corazon">

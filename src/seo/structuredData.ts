@@ -6,7 +6,7 @@ import type { PreguntaFrecuenteDTO } from '../dtos/PreguntaFrecuenteDTO';
 import type { RecetaDTO } from '../dtos/RecetaDTO';
 import type { BreadcrumbItem } from '../components/ui/Breadcrumbs/IBreadcrumbsProps';
 import { obtenerUrlInstagram, personas } from '../data/equipo';
-import { buildAbsoluteUrl, DEFAULT_IMAGE, SITE_LANGUAGE, SITE_NAME, SITE_URL } from './siteConfig';
+import { buildAbsoluteUrl, SITE_LANGUAGE, SITE_NAME, SITE_URL } from './siteConfig';
 
 const SCHEMA_CONTEXT = 'https://schema.org';
 const ORGANIZATION_ID = `${SITE_URL}/#organizacion`;
@@ -26,14 +26,14 @@ export const buildPersonData = (persona: PersonaDTO): object => ({
   worksFor: { '@id': ORGANIZATION_ID }
 });
 
-export const buildOrganizationData = (description: string): object => ({
+export const buildOrganizationData = (description: string, image: string): object => ({
   '@context': SCHEMA_CONTEXT,
   '@type': 'ProfessionalService',
   '@id': ORGANIZATION_ID,
   name: SITE_NAME,
   url: SITE_URL,
   description,
-  image: DEFAULT_IMAGE,
+  image,
   areaServed: { '@type': 'Country', name: 'España' },
   knowsAbout: ['Nutrición', 'Entrenamiento personal', 'Salud cardiovascular', 'Alimentación saludable'],
   founder: personas.map((persona) => ({ '@id': buildPersonId(persona) })),
@@ -50,13 +50,13 @@ export const buildWebsiteData = (): object => ({
   publisher: { '@id': ORGANIZATION_ID }
 });
 
-export const buildRecipeData = (receta: RecetaDTO, autora: PersonaDTO): object => ({
+export const buildRecipeData = (receta: RecetaDTO, autora: PersonaDTO, image: string): object => ({
   '@context': SCHEMA_CONTEXT,
   '@type': 'Recipe',
   name: receta.titulo,
   description: receta.resumen,
-  // PENDIENTE: foto real del plato (Google la exige para mostrar la receta enriquecida).
-  image: [DEFAULT_IMAGE],
+  // Google exige la foto del plato para mostrar la receta enriquecida (ver fotos/LEEME.md).
+  image: [image],
   author: { '@type': 'Person', '@id': buildPersonId(autora), name: autora.nombre },
   totalTime: `PT${receta.minutos}M`,
   recipeYield: `${receta.raciones}`,
@@ -67,14 +67,14 @@ export const buildRecipeData = (receta: RecetaDTO, autora: PersonaDTO): object =
   recipeInstructions: receta.pasos.map((paso, index) => ({ '@type': 'HowToStep', position: index + 1, text: paso }))
 });
 
-export const buildBlogPostingData = (entrada: EntradaDiarioDTO, autor: PersonaDTO, path: string): object => ({
+export const buildBlogPostingData = (entrada: EntradaDiarioDTO, autor: PersonaDTO, path: string, image: string): object => ({
   '@context': SCHEMA_CONTEXT,
   '@type': 'BlogPosting',
   headline: entrada.titulo,
   description: entrada.resumen,
   datePublished: entrada.fecha,
   inLanguage: SITE_LANGUAGE,
-  image: [DEFAULT_IMAGE],
+  image: [image],
   mainEntityOfPage: buildAbsoluteUrl(path),
   author: { '@type': 'Person', '@id': buildPersonId(autor), name: autor.nombre, url: buildAbsoluteUrl(autor.ruta) },
   publisher: { '@id': ORGANIZATION_ID }

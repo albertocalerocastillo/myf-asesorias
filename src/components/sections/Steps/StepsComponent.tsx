@@ -2,11 +2,12 @@
 // La línea coral se dibuja a medida que bajas (".linea-pasos" en theme.css).
 import RevealComponent from '../../ui/Reveal/RevealComponent';
 import { pasos } from '../../../data/servicio';
+import type { IStepsProps } from './IStepsProps';
 
 const REVEAL_STEP_MS = 120;
 const LINE_POSITION = 'absolute top-6 bottom-6 left-6 w-0.5 lg:top-6 lg:right-[12.5%] lg:bottom-auto lg:left-[12.5%] lg:h-0.5 lg:w-auto';
 
-const StepsComponent = () => (
+const StepsComponent = ({ headingLevel: Heading = 'h3' }: IStepsProps) => (
   <ol className="relative grid gap-10 lg:grid-cols-4 lg:gap-6">
     {/* Línea de fondo y, encima, la que se va dibujando. */}
     <span aria-hidden="true" className={`${LINE_POSITION} rounded-full bg-corazon/15`} />
@@ -18,7 +19,7 @@ const StepsComponent = () => (
             {index + 1}
           </span>
           <div>
-            <h3 className="mb-1.5 text-xl font-bold">{paso.titulo}</h3>
+            <Heading className="mb-1.5 text-xl font-bold">{paso.titulo}</Heading>
             <p className="leading-relaxed text-gris">{paso.texto}</p>
           </div>
         </RevealComponent>

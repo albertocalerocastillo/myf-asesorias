@@ -71,6 +71,10 @@ export const recetas: RecetaDTO[] = [
   }
 ];
 
-export const buscarReceta = (slug: string): RecetaDTO | undefined => recetas.find((receta) => receta.slug === slug);
+// Todas las etiquetas usadas en el recetario, sin repetir y en orden alfabético.
+export const obtenerEtiquetasRecetas = (): string[] =>
+  [...new Set(recetas.flatMap((receta) => receta.etiquetas))].sort((a, b) => a.localeCompare(b, 'es'));
+
+export const buscarReceta =(slug: string): RecetaDTO | undefined => recetas.find((receta) => receta.slug === slug);
 
 export const formatearRaciones = (raciones: number): string => `${raciones} ${raciones === 1 ? 'ración' : 'raciones'}`;

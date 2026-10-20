@@ -7,6 +7,7 @@ import App from './App';
 
 export { getPageSeo, getPrerenderRoutes, NOT_FOUND_PATH } from './seo/pageSeo';
 export { renderSeoHead } from './seo/seoHead';
+export { renderAnalyticsTag } from './seo/analytics';
 export { IS_PUBLISHED, buildAbsoluteUrl } from './seo/siteConfig';
 
 export const render = (url: string): string =>

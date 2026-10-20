@@ -6,11 +6,12 @@ import AnimatedHeadingComponent from '../../components/ui/AnimatedHeading/Animat
 import ButtonComponent from '../../components/ui/Button/ButtonComponent';
 import HeartbeatComponent from '../../components/ui/Heartbeat/HeartbeatComponent';
 import HeartIconComponent from '../../components/ui/Icons/HeartIconComponent';
-import PhotoPlaceholderComponent from '../../components/ui/PhotoPlaceholder/PhotoPlaceholderComponent';
+import PhotoComponent from '../../components/ui/Photo/PhotoComponent';
 import RevealComponent from '../../components/ui/Reveal/RevealComponent';
 import SectionComponent from '../../components/ui/Section/SectionComponent';
 import RecipeCardComponent from '../../components/sections/RecipeCard/RecipeCardComponent';
 import DiaryCardComponent from '../../components/sections/DiaryCard/DiaryCardComponent';
+import QuizComponent from '../../components/sections/Quiz/QuizComponent';
 import MarqueeComponent from '../../components/sections/Marquee/MarqueeComponent';
 import StatsComponent from '../../components/sections/Stats/StatsComponent';
 import StepsComponent from '../../components/sections/Steps/StepsComponent';
@@ -21,10 +22,14 @@ import { enterOrder, parallaxOffset } from '../../theme/animation';
 import { toneStyles } from '../../theme/toneStyles';
 import { fran, marta, personas } from '../../data/equipo';
 import { perfilesCliente } from '../../data/servicio';
+import { FOTO_EQUIPO, fotoPersona, fotoPersonaEnAccion } from '../../data/fotos';
 import { recetas } from '../../data/recetas';
 import { entradasDiario, ordenarPorFecha } from '../../data/diario';
 
 const NUMERO_ULTIMAS_PUBLICACIONES = 3;
+const HERO_PHOTO_SIZES = '(min-width: 1024px) 360px, 60vw';
+const CAMINO_PHOTO_SIZES = '(min-width: 768px) 560px, 100vw';
+const TEAM_PHOTO_SIZES = '(min-width: 1280px) 1200px, 100vw';
 const REVEAL_STEP_MS = 120;
 
 const PUNTOS_CONFIANZA = [
@@ -69,14 +74,14 @@ const HomeComponent = () => (
         {/* Las dos fotos superpuestas: cada una lleva a su página y se mueve a distinta velocidad al hacer scroll. */}
         <div className="entra relative mx-auto w-full max-w-sm pb-[12%] sm:max-w-md lg:max-w-none" style={enterOrder(4)}>
           <div className="paralaje" style={parallaxOffset(-20)}>
-            <Link to={marta.ruta} className="group relative block w-[72%] -rotate-3 transition duration-500 hover:rotate-0" aria-label="Conoce a Marta">
-              <PhotoPlaceholderComponent label="Foto de Marta" tone={Tone.Sage} className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
+            <Link to={marta.ruta} className="group relative block w-[72%] -rotate-3 transition duration-500 hover:rotate-0">
+              <PhotoComponent photo={fotoPersona(marta)} label="Marta" tone={Tone.Sage} sizes={HERO_PHOTO_SIZES} priority className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
               <span className="absolute top-6 left-3 rounded-full bg-salvia px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-left-4">Marta · Nutrición</span>
             </Link>
           </div>
           <div className="paralaje absolute right-0 bottom-0 w-[58%]" style={parallaxOffset(40)}>
-            <Link to={fran.ruta} className="group relative block rotate-3 transition duration-500 hover:rotate-0" aria-label="Conoce a Fran">
-              <PhotoPlaceholderComponent label="Foto de Fran" tone={Tone.Night} className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
+            <Link to={fran.ruta} className="group relative block rotate-3 transition duration-500 hover:rotate-0">
+              <PhotoComponent photo={fotoPersona(fran)} label="Fran" tone={Tone.Night} sizes={HERO_PHOTO_SIZES} priority className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
               <span className="absolute right-3 bottom-8 rounded-full bg-noche px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-right-4">Fran · Entreno</span>
             </Link>
           </div>
@@ -146,6 +151,16 @@ const HomeComponent = () => (
           </p>
         </div>
       </RevealComponent>
+      <RevealComponent className="lg:col-span-2">
+        <div className="paralaje" style={parallaxOffset(-16)}>
+          <PhotoComponent
+            photo={FOTO_EQUIPO}
+            label="Marta y Fran juntos"
+            sizes={TEAM_PHOTO_SIZES}
+            className="aspect-[4/3] rounded-[2rem] shadow-xl sm:aspect-[21/9]"
+          />
+        </div>
+      </RevealComponent>
     </section>
     {/* #endregion */}
 
@@ -162,8 +177,10 @@ const HomeComponent = () => (
                 className={`group flex h-full flex-col gap-6 rounded-[2rem] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 ${toneStyles[persona.tono].soft}`}
               >
                 <div className="overflow-hidden rounded-3xl">
-                  <PhotoPlaceholderComponent
-                    label={`Foto de ${persona.nombre}`}
+                  <PhotoComponent
+                    photo={fotoPersonaEnAccion(persona)}
+                    sizes={CAMINO_PHOTO_SIZES}
+                    label={`${persona.nombre}, ${persona.area.toLowerCase()}`}
                     tone={persona.tono}
                     className="aspect-[3/2] bg-white/60 transition duration-500 group-hover:scale-105"
                   />
@@ -189,6 +206,8 @@ const HomeComponent = () => (
       </SectionComponent>
     </section>
     {/* #endregion */}
+
+    <QuizComponent />
 
     <WhyUsComponent />
 
