@@ -1,23 +1,57 @@
 import { Link } from 'react-router-dom';
+import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
+import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
 import { AppRoute } from '../../../enums/AppRoute';
-import { marca } from '../../../data/equipo';
+import { marca, obtenerUrlInstagram, personas } from '../../../data/equipo';
+
+const FOOTER_LINKS = [
+  { to: AppRoute.Nutrition, label: 'Nutrición con Marta' },
+  { to: AppRoute.Training, label: 'Entrenamiento con Fran' },
+  { to: AppRoute.HowWeWork, label: 'Cómo trabajamos' }
+];
 
 const FooterComponent = () => (
-  <footer className="bg-tinta text-sm text-crema/60">
-    <div className="mx-auto flex max-w-6xl flex-col gap-4 border-t border-white/10 px-4 py-8 sm:px-6">
-      {/* Aviso de salud: la web divulga, no diagnostica. */}
-      <p className="max-w-3xl">
-        La información de esta web es divulgativa y no sustituye la consulta con tu médico. Si tienes alguna patología,
-        consulta con tu especialista antes de empezar un plan de alimentación o de entrenamiento.
-      </p>
-      <div className="flex flex-wrap gap-x-6 gap-y-2">
-        <span>
-          © {new Date().getFullYear()} {marca.nombre}
-        </span>
-        <Link to={AppRoute.Home} className="hover:text-crema">Inicio</Link>
-        <Link to={AppRoute.Nutrition} className="hover:text-crema">Nutrición</Link>
-        <Link to={AppRoute.Training} className="hover:text-crema">Entrenamiento</Link>
+  <footer className="border-t border-white/10 bg-tinta text-sm text-crema/65">
+    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[2fr_1fr_1fr]">
+      <div>
+        <Link to={AppRoute.Home} className="mb-4 inline-flex items-center gap-2 text-crema">
+          <HeartIconComponent className="size-5 text-[#f08a63]" />
+          <span className="titulo text-lg font-bold">{marca.nombre}</span>
+        </Link>
+        {/* Aviso de salud: la web divulga, no diagnostica. */}
+        <p className="max-w-md leading-relaxed">
+          La información de esta web es divulgativa y no sustituye la consulta con tu médico. Si tienes alguna patología,
+          consulta con tu especialista antes de empezar un plan de alimentación o de entrenamiento.
+        </p>
       </div>
+
+      <nav aria-label="Pie de página">
+        <p className="mb-3 font-semibold text-crema">La web</p>
+        <ul className="space-y-2">
+          {FOOTER_LINKS.map((link) => (
+            <li key={link.to}>
+              <Link to={link.to} className="hover:text-crema">{link.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div>
+        <p className="mb-3 font-semibold text-crema">Síguenos</p>
+        <ul className="space-y-2">
+          {personas.map((persona) => (
+            <li key={persona.nombre}>
+              <a href={obtenerUrlInstagram(persona.instagram)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-crema">
+                <InstagramIconComponent className="size-4" /> {persona.nombre}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div className="mx-auto max-w-6xl border-t border-white/10 px-4 py-6 sm:px-6">
+      {/* PENDIENTE: enlaces a aviso legal y privacidad cuando tengamos sus datos. */}
+      <p>© {new Date().getFullYear()} {marca.nombre}. Hecho con cariño.</p>
     </div>
   </footer>
 );

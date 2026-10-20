@@ -1,27 +1,64 @@
 @import "tailwindcss";
 
 /* Paleta: crema cálido de fondo, coral "corazón" como acento,
-   verde salvia para Nutrición (Marta) y azul noche para Entrenamiento (Fran). */
+   verde salvia para Nutrición (Marta) y azul noche para Entrenamiento (Fran).
+   Coral, salvia y noche cumplen contraste AA con texto blanco encima. */
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
   --font-titulo: "Fraunces", Georgia, serif;
   --color-crema: #faf6f0;
   --color-arena: #f1e9dd;
-  --color-tinta: #1f2421;
-  --color-gris: #5f6661;
-  --color-corazon: #e4572e;
-  --color-corazon-oscuro: #c2401b;
-  --color-salvia: #5b8c5a;
+  --color-tinta: #1c211e;
+  --color-gris: #565d58;
+  --color-corazon: #cc4319;
+  --color-corazon-oscuro: #a8360f;
+  --color-corazon-claro: #fbe4da;
+  --color-salvia: #4f7f4e;
   --color-salvia-claro: #e3eee1;
   --color-noche: #1f3a5f;
   --color-noche-claro: #e1e8f2;
+  --animate-latido: latido 1.6s ease-in-out infinite;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-body { background: var(--color-crema); color: var(--color-tinta); }
+@layer base {
+  html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-tap-highlight-color: transparent; }
+  body { background: var(--color-crema); color: var(--color-tinta); -webkit-font-smoothing: antialiased; }
+  h1, h2, h3, .titulo { font-family: var(--font-titulo); letter-spacing: -0.02em; text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-corazon-claro); }
+  :focus-visible { outline: 3px solid var(--color-corazon); outline-offset: 3px; border-radius: 6px; }
+}
 
-h1, h2, h3, .titulo { font-family: var(--font-titulo); letter-spacing: -0.01em; }
-
-/* Texto largo (historias, recetas, entradas del diario) */
-.prosa p { margin-bottom: 1.1em; line-height: 1.75; }
+/* Texto largo (historias, recetas, entradas del diario). */
+.prosa p { margin-bottom: 1.1em; line-height: 1.8; }
 .prosa p:last-child { margin-bottom: 0; }
+
+/* Aparición al hacer scroll. Solo se oculta si hay JavaScript (clase "js" en <html>),
+   así el HTML prerenderizado se ve entero aunque falle el script. */
+.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1); }
+.js .reveal.reveal-visible { opacity: 1; transform: none; }
+
+/* Línea de electrocardiograma que se dibuja sola. */
+.ecg-trazo { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ecg 3.2s cubic-bezier(.6,.1,.3,1) 0.3s forwards; }
+
+@keyframes ecg { to { stroke-dashoffset: 0; } }
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.18); }
+  30% { transform: scale(0.96); }
+  45% { transform: scale(1.1); }
+}
+
+/* Fondo cálido con dos manchas de color suaves, sin cargar imágenes. */
+.fondo-calido {
+  background:
+    radial-gradient(60rem 30rem at 90% -10%, color-mix(in srgb, var(--color-corazon) 9%, transparent), transparent 60%),
+    radial-gradient(40rem 25rem at -10% 40%, color-mix(in srgb, var(--color-salvia) 10%, transparent), transparent 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .ecg-trazo { animation: none; stroke-dashoffset: 0; }
+  .animate-latido { animation: none; }
+}

@@ -1,10 +1,14 @@
-// Cabecera fija con el menú; en el móvil se despliega con el botón de hamburguesa.
-import { useState } from 'react';
+// Cabecera fija: transparente arriba del todo y con fondo al hacer scroll.
+// En el móvil, menú a pantalla completa con botones grandes y fáciles de pulsar.
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { ArrowRight, Menu, X } from 'lucide-react';
 import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
 import { AppAnchor, AppRoute } from '../../../enums/AppRoute';
+import { useScrolled } from '../../../hooks/useScrolled';
 import { marca } from '../../../data/equipo';
+
+const SCROLL_OFFSET = 12;
 
 const MENU_LINKS = [
   { to: AppRoute.Home, label: 'Inicio' },
@@ -16,51 +20,91 @@ const MENU_LINKS = [
 const HeaderComponent = () => {
   // #region Declaraciones
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const scrolled = useScrolled(SCROLL_OFFSET);
 
-  const getLinkClasses = ({ isActive }: { isActive: boolean }): string =>
-    `font-medium transition hover:text-corazon ${isActive ? 'text-corazon' : 'text-tinta'}`;
+  const getDesktopLinkClasses = ({ isActive }: { isActive: boolean }): string =>
+    `relative py-1 font-medium transition-colors hover:text-corazon after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-corazon after:transition-transform ${
+      isActive ? 'text-corazon after:scale-x-100' : 'text-tinta after:scale-x-0'
+    }`;
+
+  const getMobileLinkClasses = ({ isActive }: { isActive: boolean }): string =>
+    `flex items-center justify-between rounded-2xl px-5 py-4 text-2xl font-semibold titulo ${
+      isActive ? 'bg-corazon-claro text-corazon' : 'text-tinta'
+    }`;
 
   const closeMenu = (): void => setMenuOpen(false);
   // #endregion
 
+  // #region Efectos
+  // Con el menú abierto, la página de detrás no se desplaza.
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : '';
+  }, [menuOpen]);
+  // #endregion
+
   // #region Renderizado
   return (
-    <header className="sticky top-0 z-40 border-b border-tinta/5 bg-crema/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link to={AppRoute.Home} className="flex items-center gap-2" onClick={closeMenu}>
-          <HeartIconComponent className="size-6 text-corazon" />
-          <span className="titulo text-xl font-bold">{marca.nombre}</span>
-        </Link>
+    <>
+      <header
+        className={`sticky top-0 z-40 transition-[background-color,box-shadow] duration-300 ${
+          scrolled || menuOpen ? 'bg-crema/95 shadow-[0_1px_0_rgb(0_0_0/0.06)] backdrop-blur' : 'bg-transparent'
+        }`}
+      >
+        <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6">
+          <Link to={AppRoute.Home} className="group flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
+            <span className="grid size-9 place-items-center rounded-full bg-corazon text-white">
+              <HeartIconComponent className="size-5 group-hover:animate-latido" />
+            </span>
+            <span className="titulo text-xl font-bold">{marca.nombre}</span>
+          </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
-          {MENU_LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getLinkClasses}>
-              {link.label}
-            </NavLink>
-          ))}
-          <a href={`#${AppAnchor.Contact}`} className="rounded-full bg-corazon px-5 py-2 font-semibold text-white hover:bg-corazon-oscuro">
-            Contacto
-          </a>
-        </nav>
+          <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
+            {MENU_LINKS.map((link) => (
+              <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getDesktopLinkClasses}>
+                {link.label}
+              </NavLink>
+            ))}
+            <a
+              href={`#${AppAnchor.Contact}`}
+              className="rounded-full bg-corazon px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-corazon-oscuro"
+            >
+              Hablemos
+            </a>
+          </nav>
 
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}>
-          {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
-        </button>
-      </div>
+          <button
+            type="button"
+            className="-mr-2 grid size-11 place-items-center rounded-full md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-controls="menu-movil"
+            aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
+          >
+            {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
+          </button>
+        </div>
+      </header>
 
+      {/* Menú del móvil: capa a pantalla completa por debajo de la cabecera. Va fuera del <header>
+          porque el desenfoque (backdrop-blur) de la cabecera atraparía un elemento fijo dentro de ella. */}
       {menuOpen && (
-        <nav className="flex flex-col gap-4 border-t border-tinta/5 px-4 py-6 md:hidden">
+        <nav id="menu-movil" aria-label="Principal" className="fixed inset-0 z-30 flex flex-col gap-2 overflow-y-auto bg-crema px-4 pt-28 pb-8 md:hidden">
           {MENU_LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getLinkClasses} onClick={closeMenu}>
+            <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getMobileLinkClasses} onClick={closeMenu}>
               {link.label}
+              <ArrowRight className="size-5 opacity-40" aria-hidden="true" />
             </NavLink>
           ))}
-          <a href={`#${AppAnchor.Contact}`} onClick={closeMenu} className="font-semibold text-corazon">
-            Contacto
+          <a
+            href={`#${AppAnchor.Contact}`}
+            onClick={closeMenu}
+            className="mt-auto rounded-full bg-corazon px-6 py-4 text-center text-lg font-semibold text-white"
+          >
+            Hablemos por Instagram
           </a>
         </nav>
       )}
-    </header>
+    </>
   );
   // #endregion
 };
