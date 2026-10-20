@@ -19,7 +19,7 @@ const ContactComponent = () => {
   return (
     <section id={AppAnchor.Contact} aria-labelledby="contacto-titulo" className="relative overflow-hidden bg-tinta text-crema">
       <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-10 h-24 w-full text-corazon/25" />
-      <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+      <div className="contenedor relative py-20 sm:py-28">
         <RevealComponent className="max-w-2xl">
           <p className="mb-3 text-sm font-semibold tracking-widest text-[#f08a63] uppercase">El primer paso es el más fácil</p>
           <h2 id="contacto-titulo" className="mb-5 text-4xl font-bold sm:text-6xl">

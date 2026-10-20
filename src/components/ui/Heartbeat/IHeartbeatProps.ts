@@ -3,4 +3,6 @@ export interface IHeartbeatProps {
   className?: string;
   /** Si es true, la línea se dibuja sola al cargar. */
   animated?: boolean;
+  /** Si es true, un punto de luz recorre la línea en bucle, como en un monitor. */
+  pulse?: boolean;
 }

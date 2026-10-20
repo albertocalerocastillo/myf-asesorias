@@ -1,6 +1,7 @@
 // Qué ofrece la asesoría y cómo funciona, sin precios (se dan en privado).
 // ⚠️ PROVISIONAL: confirmar con Marta y Fran los pasos reales y las respuestas de las preguntas frecuentes.
 import { HeartPulse, MessageCircleHeart, Smartphone, Sparkles } from 'lucide-react';
+import type { CifraDTO } from '../dtos/CifraDTO';
 import type { PasoDTO } from '../dtos/PasoDTO';
 import type { PreguntaFrecuenteDTO } from '../dtos/PreguntaFrecuenteDTO';
 import type { VentajaDTO } from '../dtos/VentajaDTO';
@@ -85,4 +86,21 @@ export const preguntasFrecuentes: PreguntaFrecuenteDTO[] = [
     respuesta:
       'Es la app que usamos para que tengas todo a mano: tu plan de comidas, tus rutinas con vídeos y tu progreso. Te la explicamos el primer día.'
   }
+];
+
+// PENDIENTE: cambiar por cifras reales cuando las tengamos (años, clientes…). Nunca inventadas.
+export const cifras: CifraDTO[] = [
+  { valor: 2, texto: 'corazones operados que siguen latiendo' },
+  { valor: 2, texto: 'áreas que se complementan: comida y entreno' },
+  { valor: 1, texto: 'plan hecho solo para ti' },
+  { valor: 100, sufijo: '%', texto: 'online, estés donde estés' }
+];
+
+export const frasesCinta: string[] = [
+  'Comida real',
+  'Entreno con cabeza',
+  'Sin dietas milagro',
+  'Hecho para ti',
+  'Trato directo',
+  'Cuidar el corazón'
 ];
