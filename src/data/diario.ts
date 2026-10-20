@@ -34,5 +34,10 @@ export const entradasDiario: EntradaDiarioDTO[] = [
 export const buscarEntradaDiario = (slug: string): EntradaDiarioDTO | undefined =>
   entradasDiario.find((entrada) => entrada.slug === slug);
 
+// Se formatea en UTC para que salga el mismo día en el HTML generado y en cualquier navegador.
 export const formatearFecha = (fechaIso: string): string =>
-  new Date(fechaIso).toLocaleDateString(IDIOMA_FECHAS, { day: 'numeric', month: 'long', year: 'numeric' });
+  new Date(fechaIso).toLocaleDateString(IDIOMA_FECHAS, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+
+// Entradas de la más reciente a la más antigua.
+export const ordenarPorFecha = (entradas: EntradaDiarioDTO[]): EntradaDiarioDTO[] =>
+  [...entradas].sort((a, b) => b.fecha.localeCompare(a.fecha));

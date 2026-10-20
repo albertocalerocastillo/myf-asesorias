@@ -1,0 +1,13 @@
+// Despliegue en Cloudflare (plan gratuito, que sí permite uso comercial). Solo ficheros estáticos:
+// cada página ya va generada en dist/ como HTML (ver scripts/prerender.mjs).
+{
+  "name": "myf-asesorias",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    // /nutricion sirve dist/nutricion.html sin redirigir, igual que el canonical.
+    "html_handling": "auto-trailing-slash",
+    // Cualquier ruta que no exista devuelve dist/404.html con estado 404 (bien para Google).
+    "not_found_handling": "404-page"
+  }
+}

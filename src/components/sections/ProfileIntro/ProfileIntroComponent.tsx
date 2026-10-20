@@ -1,57 +1,94 @@
-// Cabecera de las páginas de Nutrición y Entrenamiento: foto, historia y forma de trabajar.
+// Cabecera de las páginas de Nutrición y Entrenamiento: presentación, historia y forma de trabajar.
 // Las dos páginas son iguales salvo el color, que sale del tono de cada persona.
-import { Check } from 'lucide-react';
+import { ArrowDown, Check, HeartPulse } from 'lucide-react';
 import ButtonComponent from '../../ui/Button/ButtonComponent';
+import HeartbeatComponent from '../../ui/Heartbeat/HeartbeatComponent';
 import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
 import PhotoPlaceholderComponent from '../../ui/PhotoPlaceholder/PhotoPlaceholderComponent';
+import RevealComponent from '../../ui/Reveal/RevealComponent';
 import { obtenerUrlInstagram } from '../../../data/equipo';
 import { toneStyles } from '../../../theme/toneStyles';
 import type { IProfileIntroProps } from './IProfileIntroProps';
 
-const ProfileIntroComponent = ({ persona }: IProfileIntroProps) => {
+const ProfileIntroComponent = ({ persona, contentAnchor }: IProfileIntroProps) => {
   // #region Declaraciones
-  const textColor = toneStyles[persona.tono].text;
+  const tone = toneStyles[persona.tono];
   // #endregion
 
   // #region Renderizado
   return (
     <>
-      <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 pt-12 pb-16 sm:px-6 md:grid-cols-2 md:pt-20">
+      {/* #region Presentación */}
+      <section className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 pt-8 pb-16 sm:px-6 md:grid-cols-[1.1fr_1fr] md:pt-16 md:pb-24">
         <div>
-          <p className={`mb-3 text-sm font-semibold tracking-widest uppercase ${textColor}`}>{persona.area}</p>
-          <h1 className="mb-6 text-4xl font-bold sm:text-6xl">Soy {persona.nombre}</h1>
-          <p className="titulo mb-8 text-xl text-gris italic sm:text-2xl">“{persona.frase}”</p>
-          <ButtonComponent href={obtenerUrlInstagram(persona.instagram)} tone={persona.tono}>
-            <InstagramIconComponent /> Escríbeme por Instagram
-          </ButtonComponent>
+          <p className={`mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold ${tone.soft} ${tone.text}`}>
+            {persona.area}
+          </p>
+          <h1 className="mb-6 text-5xl leading-[1.05] font-bold sm:text-7xl">
+            Hola, soy <span className={tone.text}>{persona.nombre}</span>
+          </h1>
+          <p className="titulo mb-10 max-w-xl text-2xl leading-snug text-gris italic sm:text-3xl">“{persona.frase}”</p>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <ButtonComponent href={obtenerUrlInstagram(persona.instagram)} tone={persona.tono}>
+              <InstagramIconComponent /> Escríbeme
+            </ButtonComponent>
+            <a
+              href={`#${contentAnchor}`}
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-tinta/15 px-6 py-3.5 font-semibold transition hover:border-tinta/40"
+            >
+              Ver mi {persona.seccionContenido.toLowerCase()} <ArrowDown className="size-4" aria-hidden="true" />
+            </a>
+          </div>
         </div>
-        <PhotoPlaceholderComponent label={`Foto de ${persona.nombre}`} tone={persona.tono} className="aspect-[4/5]" />
-      </section>
 
-      <section className="bg-white/60">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 py-16 sm:px-6 md:grid-cols-[3fr_2fr]">
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Mi historia</h2>
+        <div className="relative">
+          <PhotoPlaceholderComponent label={`Foto de ${persona.nombre}`} tone={persona.tono} className="aspect-[4/5] rounded-[2rem]" />
+          <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-6">
+            <span className="grid size-10 place-items-center rounded-full bg-corazon-claro text-corazon">
+              <HeartPulse className="size-5" aria-hidden="true" />
+            </span>
+            <span className="text-sm leading-tight">
+              <span className="block font-semibold">Operación de corazón</span>
+              <span className="text-gris">Lo he vivido en primera persona</span>
+            </span>
+          </div>
+        </div>
+      </section>
+      {/* #endregion */}
+
+      {/* #region Historia y forma de trabajar */}
+      <section className="relative overflow-hidden bg-white">
+        <HeartbeatComponent className={`pointer-events-none absolute inset-x-0 top-0 h-16 w-full opacity-30 ${tone.text}`} />
+        <div className="relative mx-auto grid max-w-6xl gap-14 px-4 py-20 sm:px-6 md:grid-cols-[3fr_2fr] md:gap-20">
+          <RevealComponent>
+            <p className={`mb-3 text-sm font-semibold tracking-widest uppercase ${tone.text}`}>Mi historia</p>
+            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Por qué me dedico a esto</h2>
             <div className="prosa text-lg text-gris">
               {persona.historia.map((parrafo) => (
                 <p key={parrafo}>{parrafo}</p>
               ))}
             </div>
-            <p className="mt-6 text-sm font-medium text-gris">{persona.titulacion}</p>
-          </div>
-          <div>
-            <h2 className="mb-6 text-3xl font-bold">Cómo trabajo</h2>
-            <ul className="space-y-4">
-              {persona.enfoque.map((punto) => (
-                <li key={punto} className="flex gap-3">
-                  <Check className={`mt-0.5 size-5 shrink-0 ${textColor}`} />
-                  <span>{punto}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-arena px-4 py-2 text-sm font-medium">{persona.titulacion}</p>
+          </RevealComponent>
+
+          <RevealComponent delay={150}>
+            <div className={`rounded-3xl p-8 ${tone.soft}`}>
+              <h2 className="mb-6 text-2xl font-bold">Cómo trabajo contigo</h2>
+              <ul className="space-y-4">
+                {persona.enfoque.map((punto) => (
+                  <li key={punto} className="flex gap-3">
+                    <span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-white ${tone.text}`}>
+                      <Check className="size-4" aria-hidden="true" />
+                    </span>
+                    <span className="leading-relaxed">{punto}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </RevealComponent>
         </div>
       </section>
+      {/* #endregion */}
     </>
   );
   // #endregion
