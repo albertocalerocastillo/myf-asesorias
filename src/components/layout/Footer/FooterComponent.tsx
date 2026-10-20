@@ -16,7 +16,7 @@ const FooterComponent = () => (
     <div className="contenedor grid gap-10 py-12 md:grid-cols-[2fr_1fr_1fr]">
       <div>
         <Link to={AppRoute.Home} className="mb-4 inline-block" aria-label={`${marca.nombre}, ir al inicio`}>
-          <img src={LOGO_FULL} alt="" width={160} height={160} loading="lazy" className="size-40 rounded-2xl" />
+          <img src={LOGO_FULL} alt="" width={160} height={165} loading="lazy" className="h-auto w-40" />
         </Link>
         {/* Aviso de salud: la web divulga, no diagnostica. */}
         <p className="max-w-md leading-relaxed">
