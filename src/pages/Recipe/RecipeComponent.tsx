@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { ChefHat, Clock, Users } from 'lucide-react';
 import BreadcrumbsComponent from '../../components/ui/Breadcrumbs/BreadcrumbsComponent';
 import ButtonComponent from '../../components/ui/Button/ButtonComponent';
+import CarouselComponent from '../../components/ui/Carousel/CarouselComponent';
 import InstagramIconComponent from '../../components/ui/Icons/InstagramIconComponent';
 import PhotoComponent from '../../components/ui/Photo/PhotoComponent';
 import ShareButtonComponent from '../../components/ui/ShareButton/ShareButtonComponent';
@@ -87,11 +88,13 @@ const RecipeComponent = () => {
         <section className="bg-white">
           <div className="contenedor py-16">
             <h2 className="mb-8 text-3xl font-bold">Más recetas</h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relacionadas.map((otra) => (
+            <CarouselComponent
+              label="Más recetas"
+              gridClassName="sm:grid-cols-2 lg:grid-cols-3"
+              items={relacionadas.map((otra) => (
                 <RecipeCardComponent key={otra.slug} receta={otra} />
               ))}
-            </div>
+            />
           </div>
         </section>
       )}

@@ -2,6 +2,7 @@
 import { useParams } from 'react-router-dom';
 import BreadcrumbsComponent from '../../components/ui/Breadcrumbs/BreadcrumbsComponent';
 import ButtonComponent from '../../components/ui/Button/ButtonComponent';
+import CarouselComponent from '../../components/ui/Carousel/CarouselComponent';
 import InstagramIconComponent from '../../components/ui/Icons/InstagramIconComponent';
 import PhotoComponent from '../../components/ui/Photo/PhotoComponent';
 import ShareButtonComponent from '../../components/ui/ShareButton/ShareButtonComponent';
@@ -89,11 +90,13 @@ const DiaryEntryComponent = () => {
         <section className="bg-white">
           <div className="contenedor py-16">
             <h2 className="mb-8 text-3xl font-bold">Sigue leyendo</h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {relacionadas.map((otra) => (
+            <CarouselComponent
+              label="Más entradas del diario"
+              gridClassName="sm:grid-cols-2 lg:grid-cols-3"
+              items={relacionadas.map((otra) => (
                 <DiaryCardComponent key={otra.slug} entrada={otra} />
               ))}
-            </div>
+            />
           </div>
         </section>
       )}

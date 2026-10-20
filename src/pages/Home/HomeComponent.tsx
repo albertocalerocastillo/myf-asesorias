@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Check, HeartPulse, MessageCircleHeart, Smartphone } from 'lucide-react';
 import AnimatedHeadingComponent from '../../components/ui/AnimatedHeading/AnimatedHeadingComponent';
 import ButtonComponent from '../../components/ui/Button/ButtonComponent';
+import CarouselComponent from '../../components/ui/Carousel/CarouselComponent';
 import HeartbeatComponent from '../../components/ui/Heartbeat/HeartbeatComponent';
 import HeartIconComponent from '../../components/ui/Icons/HeartIconComponent';
 import PhotoComponent from '../../components/ui/Photo/PhotoComponent';
@@ -40,12 +41,11 @@ const PUNTOS_CONFIANZA = [
 
 const HERO_HEADING = [{ text: 'Cuidarte, contado por quien' }, { text: 'volvió a empezar', className: 'text-corazon italic' }];
 
-
 const HomeComponent = () => (
   <>
     {/* #region Portada */}
-    <section className="fondo-calido relative -mt-18 overflow-hidden pt-18">
-      <div className="contenedor grid items-center gap-14 pt-10 pb-24 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:pt-16 lg:pb-32">
+    <section className="fondo-calido relative -mt-16 overflow-hidden pt-16 lg:-mt-18 lg:pt-18">
+      <div className="contenedor grid items-center gap-12 pt-6 pb-16 sm:gap-14 sm:pt-10 sm:pb-24 lg:grid-cols-[1.3fr_1fr] lg:gap-10 lg:pt-16 lg:pb-32">
         <div className="max-w-3xl">
           <p className="entra mb-6 inline-flex items-center gap-2 rounded-full bg-white/80 px-4 py-1.5 text-sm font-semibold text-corazon shadow-sm" style={enterOrder(0)}>
             <HeartIconComponent className="size-4 animate-latido" /> Nutrición y entrenamiento online
@@ -61,7 +61,7 @@ const HomeComponent = () => (
           <div className="entra flex flex-col gap-3 sm:flex-row" style={enterOrder(3)}>
             <a
               href={`#${AppAnchor.Contact}`}
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-corazon px-7 py-4 text-lg font-semibold text-white shadow-lg shadow-corazon/25 transition hover:-translate-y-0.5 hover:bg-corazon-oscuro hover:shadow-xl hover:shadow-corazon/30"
+              className="group al-tocar inline-flex items-center justify-center gap-2 rounded-full bg-corazon px-7 py-4 text-lg font-semibold text-white shadow-lg shadow-corazon/25 transition hover:-translate-y-0.5 hover:bg-corazon-oscuro hover:shadow-xl hover:shadow-corazon/30"
             >
               Cuéntanos tu caso <ArrowRight className="size-5 transition group-hover:translate-x-1" aria-hidden="true" />
             </a>
@@ -72,21 +72,21 @@ const HomeComponent = () => (
         </div>
 
         {/* Las dos fotos superpuestas: cada una lleva a su página y se mueve a distinta velocidad al hacer scroll. */}
-        <div className="entra relative mx-auto w-full max-w-sm pb-[12%] sm:max-w-md lg:max-w-none" style={enterOrder(4)}>
+        <div className="entra relative mx-auto w-full max-w-[19rem] pb-[12%] min-[400px]:max-w-sm sm:max-w-md lg:max-w-none" style={enterOrder(4)}>
           <div className="paralaje" style={parallaxOffset(-20)}>
             <Link to={marta.ruta} className="group relative block w-[72%] -rotate-3 transition duration-500 hover:rotate-0">
               <PhotoComponent photo={fotoPersona(marta)} label="Marta" tone={Tone.Sage} sizes={HERO_PHOTO_SIZES} priority className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
-              <span className="absolute top-6 left-3 rounded-full bg-salvia px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-left-4">Marta · Nutrición</span>
+              <span className="absolute top-6 -left-2 rounded-full bg-salvia px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-left-4">Marta · Nutrición</span>
             </Link>
           </div>
           <div className="paralaje absolute right-0 bottom-0 w-[58%]" style={parallaxOffset(40)}>
             <Link to={fran.ruta} className="group relative block rotate-3 transition duration-500 hover:rotate-0">
               <PhotoComponent photo={fotoPersona(fran)} label="Fran" tone={Tone.Night} sizes={HERO_PHOTO_SIZES} priority className="aspect-[4/5] rounded-[2rem] shadow-2xl ring-8 ring-white" />
-              <span className="absolute right-3 bottom-8 rounded-full bg-noche px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-right-4">Fran · Entreno</span>
+              <span className="absolute -right-2 bottom-8 rounded-full bg-noche px-4 py-1.5 text-sm font-semibold text-white shadow-lg sm:-right-4">Fran · Entreno</span>
             </Link>
           </div>
           {/* Sello giratorio. */}
-          <div className="absolute top-[38%] left-[58%] hidden size-24 -translate-x-1/2 sm:block" aria-hidden="true">
+          <div className="absolute top-[38%] left-[58%] size-20 -translate-x-1/2 sm:size-24" aria-hidden="true">
             <svg viewBox="0 0 100 100" className="size-full animate-[spin_18s_linear_infinite] drop-shadow-lg motion-reduce:animate-none">
               <defs>
                 <path id="sello-circulo" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0" />
@@ -174,7 +174,7 @@ const HomeComponent = () => (
             <RevealComponent key={persona.nombre} delay={index * REVEAL_STEP_MS} className="h-full">
               <Link
                 to={persona.ruta}
-                className={`group flex h-full flex-col gap-6 rounded-[2rem] p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8 ${toneStyles[persona.tono].soft}`}
+                className={`group al-tocar flex h-full flex-col gap-5 rounded-[2rem] p-5 transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:gap-6 sm:p-8 ${toneStyles[persona.tono].soft}`}
               >
                 <div className="overflow-hidden rounded-3xl">
                   <PhotoComponent
@@ -182,7 +182,7 @@ const HomeComponent = () => (
                     sizes={CAMINO_PHOTO_SIZES}
                     label={`${persona.nombre}, ${persona.area.toLowerCase()}`}
                     tone={persona.tono}
-                    className="aspect-[3/2] bg-white/60 transition duration-500 group-hover:scale-105"
+                    className="aspect-[16/9] bg-white/60 transition duration-500 group-hover:scale-105 sm:aspect-[3/2]"
                   />
                 </div>
                 <div className="flex flex-1 flex-col">
@@ -246,13 +246,15 @@ const HomeComponent = () => (
       title="Recetas para cuidarte"
       intro="Recetas saludables y sencillas, con comida real, para cuidar tu corazón sin pasar hambre."
     >
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {recetas.slice(0, NUMERO_ULTIMAS_PUBLICACIONES).map((receta, index) => (
+      <CarouselComponent
+        label="Últimas recetas"
+        gridClassName="sm:grid-cols-2 lg:grid-cols-3"
+        items={recetas.slice(0, NUMERO_ULTIMAS_PUBLICACIONES).map((receta, index) => (
           <RevealComponent key={receta.slug} delay={index * REVEAL_STEP_MS} className="h-full">
             <RecipeCardComponent receta={receta} />
           </RevealComponent>
         ))}
-      </div>
+      />
       <Link to={`${AppRoute.Nutrition}#${AppAnchor.Recipes}`} className="mt-8 inline-flex items-center gap-2 font-semibold text-salvia hover:underline">
         Ver todas las recetas <ArrowRight className="size-4" aria-hidden="true" />
       </Link>
@@ -264,15 +266,17 @@ const HomeComponent = () => (
       intro="Cómo entrena Fran, qué le funciona y lo que ha aprendido desde su operación."
       className="pt-0 sm:pt-0"
     >
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {ordenarPorFecha(entradasDiario)
+      <CarouselComponent
+        label="Últimas entradas del diario"
+        gridClassName="sm:grid-cols-2 lg:grid-cols-3"
+        items={ordenarPorFecha(entradasDiario)
           .slice(0, NUMERO_ULTIMAS_PUBLICACIONES)
           .map((entrada, index) => (
             <RevealComponent key={entrada.slug} delay={index * REVEAL_STEP_MS} className="h-full">
               <DiaryCardComponent entrada={entrada} />
             </RevealComponent>
           ))}
-      </div>
+      />
       <Link to={`${AppRoute.Training}#${AppAnchor.Diary}`} className="mt-8 inline-flex items-center gap-2 font-semibold text-noche hover:underline">
         Ver todo el diario <ArrowRight className="size-4" aria-hidden="true" />
       </Link>

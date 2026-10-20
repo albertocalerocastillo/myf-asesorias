@@ -94,7 +94,7 @@ const QuizComponent = () => {
                     key={opcion.texto}
                     type="button"
                     onClick={() => responder(opcion)}
-                    className="group flex items-center justify-between gap-3 rounded-2xl border-2 border-tinta/10 px-5 py-4 text-left font-medium transition hover:border-corazon hover:bg-corazon-claro/50"
+                    className="group al-tocar flex items-center justify-between gap-3 rounded-2xl border-2 border-tinta/10 px-5 py-4 text-left font-medium hover:border-corazon hover:bg-corazon-claro/50 active:border-corazon active:bg-corazon-claro/50"
                   >
                     {opcion.texto}
                     <ArrowRight className="size-4 shrink-0 text-corazon opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />

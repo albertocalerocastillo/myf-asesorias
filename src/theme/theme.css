@@ -41,9 +41,30 @@
   :focus-visible { outline: 3px solid var(--color-corazon); outline-offset: 3px; border-radius: 6px; }
 }
 
-/* Texto largo (historias, recetas, entradas del diario). */
-.prosa p { margin-bottom: 1.1em; line-height: 1.8; }
-.prosa p:last-child { margin-bottom: 0; }
+/* Texto largo (historias, recetas, entradas del diario). En una capa para que las utilidades
+   (p. ej. leading-snug en un párrafo destacado) puedan cambiarlo. */
+@layer components {
+  .prosa p { margin-bottom: 1.1em; line-height: 1.8; }
+  .prosa p:last-child { margin-bottom: 0; }
+}
+
+/* Carrusel deslizable con el dedo (en móvil): sin barra de scroll visible. */
+@utility sin-barra {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+/* Separación inferior que respeta la barra de inicio del iPhone. */
+@utility abajo-seguro {
+  bottom: calc(1rem + env(safe-area-inset-bottom));
+}
+
+/* Respuesta al tocar en pantallas táctiles (en móvil no hay "hover"). */
+@utility al-tocar {
+  transition-property: transform, box-shadow, background-color, color, border-color, opacity;
+  transition-duration: .2s;
+  &:active { transform: scale(.97); }
+}
 
 /* Fondo cálido con dos manchas de color suaves, sin cargar imágenes. */
 .fondo-calido {
