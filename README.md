@@ -17,6 +17,12 @@ npm run fotos      # solo prepara las fotos de fotos/ (también lo hacen dev y b
 npm run lint:fix   # aplica la guía de estilos
 ```
 
+## Despliegue
+
+Cloudflare (Workers, plan gratuito) está conectado a este repositorio: cada push a `master` compila
+y publica la web automáticamente. Las cabeceras de seguridad y caché están en `public/_headers`.
+También se puede publicar a mano con `npm run deploy`.
+
 ## Fotos
 
 Los originales van en `fotos/` (ver `fotos/LEEME.md`). `scripts/optimize-photos.mjs` genera
