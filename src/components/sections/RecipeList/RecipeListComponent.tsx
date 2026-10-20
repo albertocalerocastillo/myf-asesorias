@@ -13,7 +13,7 @@ const RecipeListComponent = () => {
   const visibles = filtro ? recetas.filter((receta) => receta.etiquetas.includes(filtro)) : recetas;
 
   const getChipClasses = (active: boolean): string =>
-    `rounded-full px-4 py-2 text-sm font-semibold transition ${
+    `al-tocar rounded-full px-4 py-2.5 text-sm font-semibold ${
       active ? 'bg-salvia text-white shadow-md shadow-salvia/20' : 'border border-tinta/10 bg-white text-tinta hover:border-salvia hover:text-salvia'
     }`;
   // #endregion

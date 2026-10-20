@@ -21,7 +21,7 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
 
   // #region Renderizado
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-noche/10">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-noche/10">
       <div className="overflow-hidden">
         <PhotoComponent
           photo={fotoEntradaDiario(entrada)}

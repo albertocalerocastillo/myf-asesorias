@@ -1,21 +1,17 @@
 // Cabecera fija: transparente arriba del todo y con fondo al hacer scroll.
-// En el móvil, menú a pantalla completa con botones grandes y fáciles de pulsar.
-import { useEffect, useState } from 'react';
+// En el móvil, el botón de hamburguesa se transforma en una X y abre MobileMenuComponent.
+import { useCallback, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { ArrowRight, Menu, X } from 'lucide-react';
+import MobileMenuComponent from '../MobileMenu/MobileMenuComponent';
+import { MENU_LINKS } from '../navigation';
 import { AppAnchor, AppRoute } from '../../../enums/AppRoute';
 import { useScrolled } from '../../../hooks/useScrolled';
 import { marca } from '../../../data/equipo';
 
 const SCROLL_OFFSET = 12;
 const LOGO_ICON = '/logo-icono.webp';
-
-const MENU_LINKS = [
-  { to: AppRoute.Home, label: 'Inicio' },
-  { to: AppRoute.Nutrition, label: 'Nutrición' },
-  { to: AppRoute.Training, label: 'Entrenamiento' },
-  { to: AppRoute.HowWeWork, label: 'Cómo trabajamos' }
-];
+// Cada raya del botón de menú: arriba y abajo giran para formar la X, la del medio desaparece.
+const BURGER_LINE = 'absolute left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-tinta transition-all duration-300 ease-[var(--ease-suave)]';
 
 const HeaderComponent = () => {
   // #region Declaraciones
@@ -27,19 +23,8 @@ const HeaderComponent = () => {
       isActive ? 'text-corazon after:scale-x-100' : 'text-tinta after:scale-x-0'
     }`;
 
-  const getMobileLinkClasses = ({ isActive }: { isActive: boolean }): string =>
-    `flex items-center justify-between rounded-2xl px-5 py-4 text-2xl font-semibold titulo ${
-      isActive ? 'bg-corazon-claro text-corazon' : 'text-tinta'
-    }`;
-
-  const closeMenu = (): void => setMenuOpen(false);
-  // #endregion
-
-  // #region Efectos
-  // Con el menú abierto, la página de detrás no se desplaza.
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : '';
-  }, [menuOpen]);
+  // Estable entre renderizados: el menú la usa dentro de un efecto.
+  const closeMenu = useCallback((): void => setMenuOpen(false), []);
   // #endregion
 
   // #region Renderizado
@@ -50,10 +35,10 @@ const HeaderComponent = () => {
           scrolled || menuOpen ? 'bg-crema/95 shadow-[0_1px_0_rgb(0_0_0/0.06)] backdrop-blur' : 'bg-transparent'
         }`}
       >
-        <div className="contenedor flex h-18 items-center justify-between">
-          <Link to={AppRoute.Home} className="group flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
-            <img src={LOGO_ICON} alt="" width={40} height={40} className="size-10 rounded-xl transition group-hover:scale-105" />
-            <span className="titulo text-xl font-bold whitespace-nowrap">{marca.nombre}</span>
+        <div className="contenedor flex h-16 items-center justify-between lg:h-18">
+          <Link to={AppRoute.Home} className="group al-tocar flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
+            <img src={LOGO_ICON} alt="" width={40} height={40} className="size-9 rounded-xl transition group-hover:scale-105 lg:size-10" />
+            <span className="titulo text-lg font-bold whitespace-nowrap lg:text-xl">{marca.nombre}</span>
           </Link>
 
           <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
@@ -72,38 +57,22 @@ const HeaderComponent = () => {
 
           <button
             type="button"
-            className="-mr-2 grid size-11 place-items-center rounded-full lg:hidden"
+            className="al-tocar relative -mr-2 size-11 rounded-full active:bg-arena lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="menu-movil"
             aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'}
           >
-            {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
+            <span aria-hidden="true" className={`${BURGER_LINE} ${menuOpen ? 'top-1/2 -translate-y-1/2 rotate-45' : 'top-[15px]'}`} />
+            <span aria-hidden="true" className={`${BURGER_LINE} top-1/2 -translate-y-1/2 ${menuOpen ? 'scale-x-0 opacity-0' : ''}`} />
+            <span aria-hidden="true" className={`${BURGER_LINE} ${menuOpen ? 'top-1/2 -translate-y-1/2 -rotate-45' : 'top-[27px]'}`} />
           </button>
         </div>
         {/* Progreso de lectura de la página (solo en navegadores que lo soportan, ver theme.css). */}
         <span aria-hidden="true" className="barra-progreso absolute inset-x-0 bottom-0 h-0.5 bg-corazon" />
       </header>
 
-      {/* Menú del móvil: capa a pantalla completa por debajo de la cabecera. Va fuera del <header>
-          porque el desenfoque (backdrop-blur) de la cabecera atraparía un elemento fijo dentro de ella. */}
-      {menuOpen && (
-        <nav id="menu-movil" aria-label="Principal" className="fixed inset-0 z-30 flex flex-col gap-2 overflow-y-auto bg-crema px-5 pt-28 pb-8 sm:px-8 lg:hidden">
-          {MENU_LINKS.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getMobileLinkClasses} onClick={closeMenu}>
-              {link.label}
-              <ArrowRight className="size-5 opacity-40" aria-hidden="true" />
-            </NavLink>
-          ))}
-          <a
-            href={`#${AppAnchor.Contact}`}
-            onClick={closeMenu}
-            className="mt-auto rounded-full bg-corazon px-6 py-4 text-center text-lg font-semibold text-white"
-          >
-            Hablemos por Instagram
-          </a>
-        </nav>
-      )}
+      <MobileMenuComponent open={menuOpen} onClose={closeMenu} />
     </>
   );
   // #endregion
