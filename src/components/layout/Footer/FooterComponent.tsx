@@ -12,7 +12,7 @@ const FOOTER_LINKS = [
 
 const FooterComponent = () => (
   <footer className="border-t border-white/10 bg-tinta text-sm text-crema/65">
-    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[2fr_1fr_1fr]">
+    <div className="contenedor grid gap-10 py-12 md:grid-cols-[2fr_1fr_1fr]">
       <div>
         <Link to={AppRoute.Home} className="mb-4 inline-flex items-center gap-2 text-crema">
           <HeartIconComponent className="size-5 text-[#f08a63]" />
@@ -49,7 +49,7 @@ const FooterComponent = () => (
         </ul>
       </div>
     </div>
-    <div className="mx-auto max-w-6xl border-t border-white/10 px-4 py-6 sm:px-6">
+    <div className="contenedor border-t border-white/10 py-6">
       {/* PENDIENTE: enlaces a aviso legal y privacidad cuando tengamos sus datos. */}
       <p>© {new Date().getFullYear()} {marca.nombre}. Hecho con cariño.</p>
     </div>

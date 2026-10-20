@@ -96,7 +96,7 @@ const RecipeComponent = () => {
 
       {relacionadas.length > 0 && (
         <section className="bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+          <div className="contenedor py-16">
             <h2 className="mb-8 text-3xl font-bold">Más recetas</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relacionadas.map((otra) => (

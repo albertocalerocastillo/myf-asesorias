@@ -13,16 +13,28 @@
   --color-corazon: #cc4319;
   --color-corazon-oscuro: #a8360f;
   --color-corazon-claro: #fbe4da;
+  --color-corazon-suave: #f08a63;
   --color-salvia: #4f7f4e;
   --color-salvia-claro: #e3eee1;
   --color-noche: #1f3a5f;
   --color-noche-claro: #e1e8f2;
   --animate-latido: latido 1.6s ease-in-out infinite;
+  --ease-suave: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* Ancho de página común: márgenes cómodos en el móvil y algo más de aire en pantallas grandes. */
+@utility contenedor {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1.25rem;
+  @media (min-width: 40rem) { padding-inline: 2rem; }
+  @media (min-width: 96rem) { max-width: 80rem; }
 }
 
 @layer base {
   html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; -webkit-tap-highlight-color: transparent; }
-  body { background: var(--color-crema); color: var(--color-tinta); -webkit-font-smoothing: antialiased; }
+  body { background: var(--color-crema); color: var(--color-tinta); -webkit-font-smoothing: antialiased; overflow-x: clip; }
   h1, h2, h3, .titulo { font-family: var(--font-titulo); letter-spacing: -0.02em; text-wrap: balance; }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-corazon-claro); }
@@ -33,22 +45,6 @@
 .prosa p { margin-bottom: 1.1em; line-height: 1.8; }
 .prosa p:last-child { margin-bottom: 0; }
 
-/* Aparición al hacer scroll. Solo se oculta si hay JavaScript (clase "js" en <html>),
-   así el HTML prerenderizado se ve entero aunque falle el script. */
-.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s cubic-bezier(.2,.7,.2,1), transform 0.8s cubic-bezier(.2,.7,.2,1); }
-.js .reveal.reveal-visible { opacity: 1; transform: none; }
-
-/* Línea de electrocardiograma que se dibuja sola. */
-.ecg-trazo { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ecg 3.2s cubic-bezier(.6,.1,.3,1) 0.3s forwards; }
-
-@keyframes ecg { to { stroke-dashoffset: 0; } }
-@keyframes latido {
-  0%, 100% { transform: scale(1); }
-  15% { transform: scale(1.18); }
-  30% { transform: scale(0.96); }
-  45% { transform: scale(1.1); }
-}
-
 /* Fondo cálido con dos manchas de color suaves, sin cargar imágenes. */
 .fondo-calido {
   background:
@@ -56,9 +52,91 @@
     radial-gradient(40rem 25rem at -10% 40%, color-mix(in srgb, var(--color-salvia) 10%, transparent), transparent 60%);
 }
 
+/* ─── Aparición al hacer scroll ───────────────────────────────────────────
+   Solo se oculta si hay JavaScript (clase "js" en <html>), así el HTML
+   prerenderizado se ve entero aunque falle el script. */
+.js .reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease-suave), transform .8s var(--ease-suave); }
+.js .reveal.reveal-visible { opacity: 1; transform: none; }
+
+/* ─── Titular que aparece palabra a palabra ───────────────────────────────
+   Cada palabra sube desde detrás de una "máscara". Es solo CSS: funciona también
+   en el HTML prerenderizado, antes de que cargue React. */
+.palabra { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.palabra > span { display: inline-block; transform: translateY(105%); animation: palabra-sube .9s var(--ease-suave) forwards; animation-delay: calc(var(--orden) * 70ms + 150ms); }
+@keyframes palabra-sube { to { transform: none; } }
+
+/* Elementos que aparecen al cargar, escalonados con --orden. */
+.entra { opacity: 0; animation: entra .9s var(--ease-suave) forwards; animation-delay: calc(var(--orden, 0) * 90ms + 500ms); }
+@keyframes entra { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ─── Cambio de página: el contenido entra con un fundido suave ──────────── */
+.pagina { animation: pagina .55s var(--ease-suave) both; }
+@keyframes pagina { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+/* ─── Línea de electrocardiograma ─────────────────────────────────────────── */
+.ecg-trazo { stroke-dasharray: 1400; stroke-dashoffset: 1400; animation: ecg 3.2s cubic-bezier(.6,.1,.3,1) .3s forwards; }
+@keyframes ecg { to { stroke-dashoffset: 0; } }
+
+/* Un punto de luz que recorre la línea, como en un monitor. */
+.ecg-pulso { stroke-dasharray: 60 1400; stroke-dashoffset: 60; animation: ecg-pulso 3.4s linear 3.5s infinite; }
+@keyframes ecg-pulso { from { stroke-dashoffset: 60; } to { stroke-dashoffset: -1400; } }
+
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.18); }
+  30% { transform: scale(.96); }
+  45% { transform: scale(1.1); }
+}
+.latido-desfasado { animation-delay: .8s; }
+
+/* ─── Cinta de frases que se desliza sin fin ───────────────────────────────
+   El contenido va duplicado: al llegar a la mitad, vuelve al inicio sin salto. */
+.cinta { display: flex; width: max-content; animation: cinta 45s linear infinite; }
+.cinta-contenedor:hover .cinta { animation-play-state: paused; }
+@keyframes cinta { to { transform: translateX(-50%); } }
+
+/* ─── Efectos ligados al scroll (solo en navegadores que lo soportan) ──────── */
+.barra-progreso { display: none; }
+
+@supports (animation-timeline: scroll()) {
+  /* Barra de progreso de lectura bajo la cabecera. */
+  .barra-progreso {
+    display: block;
+    transform-origin: left;
+    animation: progreso linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes progreso { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* La línea que une los pasos se dibuja según bajas. */
+  .linea-pasos {
+    animation: dibujar-vertical linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 55%;
+  }
+  @media (min-width: 64rem) {
+    .linea-pasos { animation-name: dibujar-horizontal; }
+  }
+  @keyframes dibujar-vertical { from { clip-path: inset(0 0 100% 0); } to { clip-path: inset(0); } }
+  @keyframes dibujar-horizontal { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+
+  /* Profundidad: las fotos se desplazan un poco más despacio que la página. */
+  .paralaje {
+    animation: paralaje linear both;
+    animation-timeline: view();
+    animation-range: cover;
+  }
+  @keyframes paralaje {
+    from { translate: 0 var(--paralaje, 30px); }
+    to { translate: 0 calc(var(--paralaje, 30px) * -1); }
+  }
+}
+
+/* ─── Si el sistema pide reducir el movimiento, se quita todo lo animado ──── */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }
+  .palabra > span, .entra, .pagina { animation: none; transform: none; opacity: 1; }
   .ecg-trazo { animation: none; stroke-dashoffset: 0; }
-  .animate-latido { animation: none; }
+  .ecg-pulso, .animate-latido, .cinta, .paralaje, .linea-pasos { animation: none; }
 }

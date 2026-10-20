@@ -50,15 +50,15 @@ const HeaderComponent = () => {
           scrolled || menuOpen ? 'bg-crema/95 shadow-[0_1px_0_rgb(0_0_0/0.06)] backdrop-blur' : 'bg-transparent'
         }`}
       >
-        <div className="mx-auto flex h-18 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="contenedor flex h-18 items-center justify-between">
           <Link to={AppRoute.Home} className="group flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
             <span className="grid size-9 place-items-center rounded-full bg-corazon text-white">
               <HeartIconComponent className="size-5 group-hover:animate-latido" />
             </span>
-            <span className="titulo text-xl font-bold">{marca.nombre}</span>
+            <span className="titulo text-xl font-bold whitespace-nowrap">{marca.nombre}</span>
           </Link>
 
-          <nav aria-label="Principal" className="hidden items-center gap-8 md:flex">
+          <nav aria-label="Principal" className="hidden items-center gap-8 lg:flex">
             {MENU_LINKS.map((link) => (
               <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getDesktopLinkClasses}>
                 {link.label}
@@ -74,7 +74,7 @@ const HeaderComponent = () => {
 
           <button
             type="button"
-            className="-mr-2 grid size-11 place-items-center rounded-full md:hidden"
+            className="-mr-2 grid size-11 place-items-center rounded-full lg:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-controls="menu-movil"
@@ -83,12 +83,14 @@ const HeaderComponent = () => {
             {menuOpen ? <X className="size-7" /> : <Menu className="size-7" />}
           </button>
         </div>
+        {/* Progreso de lectura de la página (solo en navegadores que lo soportan, ver theme.css). */}
+        <span aria-hidden="true" className="barra-progreso absolute inset-x-0 bottom-0 h-0.5 bg-corazon" />
       </header>
 
       {/* Menú del móvil: capa a pantalla completa por debajo de la cabecera. Va fuera del <header>
           porque el desenfoque (backdrop-blur) de la cabecera atraparía un elemento fijo dentro de ella. */}
       {menuOpen && (
-        <nav id="menu-movil" aria-label="Principal" className="fixed inset-0 z-30 flex flex-col gap-2 overflow-y-auto bg-crema px-4 pt-28 pb-8 md:hidden">
+        <nav id="menu-movil" aria-label="Principal" className="fixed inset-0 z-30 flex flex-col gap-2 overflow-y-auto bg-crema px-5 pt-28 pb-8 sm:px-8 lg:hidden">
           {MENU_LINKS.map((link) => (
             <NavLink key={link.to} to={link.to} end={link.to === AppRoute.Home} className={getMobileLinkClasses} onClick={closeMenu}>
               {link.label}

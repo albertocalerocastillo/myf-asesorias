@@ -30,7 +30,7 @@ const HowWeWorkComponent = () => (
 
     {/* #region Qué incluye cada área */}
     <section className="bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div className="contenedor py-20">
         <h2 className="mb-10 text-3xl font-bold sm:text-4xl">Qué incluye cada parte</h2>
         <div className="grid gap-6 md:grid-cols-2">
           {personas.map((persona, index) => (
