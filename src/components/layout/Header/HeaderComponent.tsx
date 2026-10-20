@@ -3,12 +3,12 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ArrowRight, Menu, X } from 'lucide-react';
-import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
 import { AppAnchor, AppRoute } from '../../../enums/AppRoute';
 import { useScrolled } from '../../../hooks/useScrolled';
 import { marca } from '../../../data/equipo';
 
 const SCROLL_OFFSET = 12;
+const LOGO_ICON = '/logo-icono.webp';
 
 const MENU_LINKS = [
   { to: AppRoute.Home, label: 'Inicio' },
@@ -52,9 +52,7 @@ const HeaderComponent = () => {
       >
         <div className="contenedor flex h-18 items-center justify-between">
           <Link to={AppRoute.Home} className="group flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
-            <span className="grid size-9 place-items-center rounded-full bg-corazon text-white">
-              <HeartIconComponent className="size-5 group-hover:animate-latido" />
-            </span>
+            <img src={LOGO_ICON} alt="" width={40} height={40} className="size-10 rounded-xl transition group-hover:scale-105" />
             <span className="titulo text-xl font-bold whitespace-nowrap">{marca.nombre}</span>
           </Link>
 

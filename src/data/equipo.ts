@@ -8,7 +8,7 @@ const URL_INSTAGRAM = 'https://instagram.com';
 const URL_WHATSAPP = 'https://wa.me';
 
 export const marca = {
-  nombre: 'M y F Asesorías',
+  nombre: 'M&F Asesorías',
   // Si quieren botón de WhatsApp, número con prefijo y sin espacios (p. ej. '34600000000').
   whatsapp: null as string | null
 };
