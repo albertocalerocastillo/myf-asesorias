@@ -1,5 +1,5 @@
 // Datos de la marca y de las dos personas.
-// ⚠️ PROVISIONAL: lo marcado como PENDIENTE se rellena con lo que nos pasen Marta y Fran (ver PREGUNTAS.md).
+// ⚠️ PROVISIONAL: lo marcado como PENDIENTE se rellena con lo que nos pasen Marta y Fran con los datos reales.
 import type { PersonaDTO } from '../dtos/PersonaDTO';
 import { AppRoute } from '../enums/AppRoute';
 import { Tone } from '../enums/Tone';
