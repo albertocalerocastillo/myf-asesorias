@@ -1,14 +1,15 @@
 {
-  "name": "M y F Asesorías",
-  "short_name": "M y F",
+  "name": "M&F Asesorías",
+  "short_name": "M&F",
   "description": "Nutrición y entrenamiento personal online con Marta y Fran.",
   "lang": "es",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#faf6f0",
-  "theme_color": "#cc4319",
+  "theme_color": "#c03f17",
   "icons": [
-    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/logo-icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logo-icono-512.png", "sizes": "512x512", "type": "image/png" },
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
   ]
 }

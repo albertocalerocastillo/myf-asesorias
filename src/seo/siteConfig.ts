@@ -7,7 +7,7 @@ export const SITE_URL = 'https://myfasesorias.es';
 // Ponerlo a true solo cuando tenga los textos y las fotos reales.
 export const IS_PUBLISHED = false;
 
-export const SITE_NAME = 'M y F Asesorías';
+export const SITE_NAME = 'M&F Asesorías';
 export const SITE_LOCALE = 'es_ES';
 export const SITE_LANGUAGE = 'es';
 export const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;

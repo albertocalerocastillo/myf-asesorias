@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
-import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
 import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
 import { AppRoute } from '../../../enums/AppRoute';
 import { marca, obtenerUrlInstagram, personas } from '../../../data/equipo';
+
+const LOGO_FULL = '/logo-completo.webp';
 
 const FOOTER_LINKS = [
   { to: AppRoute.Nutrition, label: 'Nutrición con Marta' },
@@ -14,9 +15,8 @@ const FooterComponent = () => (
   <footer className="border-t border-white/10 bg-tinta text-sm text-crema/65">
     <div className="contenedor grid gap-10 py-12 md:grid-cols-[2fr_1fr_1fr]">
       <div>
-        <Link to={AppRoute.Home} className="mb-4 inline-flex items-center gap-2 text-crema">
-          <HeartIconComponent className="size-5 text-[#f08a63]" />
-          <span className="titulo text-lg font-bold">{marca.nombre}</span>
+        <Link to={AppRoute.Home} className="mb-4 inline-block" aria-label={`${marca.nombre}, ir al inicio`}>
+          <img src={LOGO_FULL} alt="" width={160} height={160} loading="lazy" className="size-40 rounded-2xl" />
         </Link>
         {/* Aviso de salud: la web divulga, no diagnostica. */}
         <p className="max-w-md leading-relaxed">

@@ -146,7 +146,7 @@ const HomeComponent = () => (
             <strong className="font-semibold text-noche">Fran</strong>, lo que vale entrenar para mantenerse fuerte.
           </p>
           <p>
-            De ahí nace <strong className="font-semibold text-tinta">M y F Asesorías</strong>: para ayudarte a ti a
+            De ahí nace <strong className="font-semibold text-tinta">M&amp;F Asesorías</strong>: para ayudarte a ti a
             conseguirlo, sin extremos y adaptándonos a tu vida.
           </p>
         </div>
