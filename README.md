@@ -5,15 +5,23 @@ operadas de corazón.
 
 ## Tecnología
 
-React 19 · TypeScript · Vite · Tailwind CSS 4 · React Router · prerenderizado propio (SSG).
+React 19 · TypeScript · Vite · Tailwind CSS 4 · React Router · prerenderizado propio (SSG) ·
+View Transitions API · Screen Wake Lock API · sharp (fotos).
 
 ```bash
 npm install
 npm run dev        # desarrollo en http://localhost:5173
 npm run build      # tipos + web + HTML prerenderizado de cada página, sitemap y robots
 npm run preview    # sirve la versión final (dist/)
+npm run fotos      # solo prepara las fotos de fotos/ (también lo hacen dev y build)
 npm run lint:fix   # aplica la guía de estilos
 ```
+
+## Fotos
+
+Los originales van en `fotos/` (ver `fotos/LEEME.md`). `scripts/optimize-photos.mjs` genera
+AVIF y WebP en varios anchos con una miniatura borrosa, y `PhotoComponent` elige la versión justa
+para cada pantalla (`srcset`/`sizes`). Si una foto aún no existe, pinta un hueco con su descripción.
 
 ## Cómo funciona el SEO
 

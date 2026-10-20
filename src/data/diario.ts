@@ -38,6 +38,15 @@ export const buscarEntradaDiario = (slug: string): EntradaDiarioDTO | undefined 
 export const formatearFecha = (fechaIso: string): string =>
   new Date(fechaIso).toLocaleDateString(IDIOMA_FECHAS, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 
+// Minutos de lectura a un ritmo normal (unas 200 palabras por minuto), como mínimo 1.
+const PALABRAS_POR_MINUTO = 200;
+
+export const calcularMinutosLectura = (entrada: EntradaDiarioDTO): number => {
+  const palabras = [entrada.resumen, ...entrada.texto].join(' ').split(/\s+/).filter(Boolean).length;
+  const result = Math.max(1, Math.round(palabras / PALABRAS_POR_MINUTO));
+  return result;
+};
+
 // Entradas de la más reciente a la más antigua.
 export const ordenarPorFecha = (entradas: EntradaDiarioDTO[]): EntradaDiarioDTO[] =>
   [...entradas].sort((a, b) => b.fecha.localeCompare(a.fecha));

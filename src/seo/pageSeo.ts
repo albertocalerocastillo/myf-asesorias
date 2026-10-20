@@ -16,7 +16,8 @@ import {
   buildWebsiteData
 } from './structuredData';
 import { PageType, type IPageSeo } from './IPageSeo';
-import { SITE_NAME, TITLE_SEPARATOR } from './siteConfig';
+import { buildAbsoluteUrl, DEFAULT_IMAGE, SITE_NAME, TITLE_SEPARATOR } from './siteConfig';
+import { FOTO_EQUIPO, fotoEntradaDiario, fotoPersona, fotoReceta, obtenerRutaFoto } from '../data/fotos';
 
 export const NOT_FOUND_PATH = '/404';
 
@@ -25,18 +26,29 @@ const HOME_DESCRIPTION =
 
 const withSiteName = (title: string): string => `${title}${TITLE_SEPARATOR}${SITE_NAME}`;
 
+// URL absoluta de una foto, o la imagen general para compartir si todavía no existe.
+const photoUrl = (photo: string): string => {
+  const ruta = obtenerRutaFoto(photo);
+  const result = ruta ? buildAbsoluteUrl(ruta) : DEFAULT_IMAGE;
+  return result;
+};
+
+const HOME_IMAGE = photoUrl(FOTO_EQUIPO);
+
 const STATIC_PAGES: Record<string, IPageSeo> = {
   [AppRoute.Home]: {
     title: `${SITE_NAME}${TITLE_SEPARATOR}Nutrición y entrenamiento personal online`,
     description: HOME_DESCRIPTION,
     path: AppRoute.Home,
-    structuredData: [buildOrganizationData(HOME_DESCRIPTION), buildWebsiteData()]
+    image: HOME_IMAGE,
+    structuredData: [buildOrganizationData(HOME_DESCRIPTION, HOME_IMAGE), buildWebsiteData()]
   },
   [AppRoute.Nutrition]: {
     title: withSiteName('Nutrición personalizada online con Marta'),
     description:
       'Planes de alimentación a tu medida, con comida real y sin dietas milagro. Conoce a Marta, su historia y sus recetas saludables para cuidar tu corazón.',
     path: AppRoute.Nutrition,
+    image: photoUrl(fotoPersona(marta)),
     type: PageType.Profile,
     structuredData: [buildProfilePageData(marta)]
   },
@@ -45,6 +57,7 @@ const STATIC_PAGES: Record<string, IPageSeo> = {
     description:
       'Entrenamientos personalizados y seguros, adaptados a tu nivel, en la app Jarvis. Conoce a Fran, su historia y su diario de entrenamiento.',
     path: AppRoute.Training,
+    image: photoUrl(fotoPersona(fran)),
     type: PageType.Profile,
     structuredData: [buildProfilePageData(fran)]
   },
@@ -66,6 +79,7 @@ const STATIC_PAGES: Record<string, IPageSeo> = {
 const getRecipeSeo = (path: string, slug: string): IPageSeo | null => {
   // #region Declaraciones
   const receta = buscarReceta(slug);
+  const image = receta ? photoUrl(fotoReceta(receta)) : DEFAULT_IMAGE;
   // #endregion
 
   if (!receta) {
@@ -76,8 +90,9 @@ const getRecipeSeo = (path: string, slug: string): IPageSeo | null => {
     title: withSiteName(`${receta.titulo}: receta saludable`),
     description: `${receta.resumen} Receta de Marta lista en ${receta.minutos} minutos.`,
     path,
+    image,
     type: PageType.Article,
-    structuredData: [buildRecipeData(receta, marta), buildBreadcrumbData(buildRecipeBreadcrumbs(receta), path)]
+    structuredData: [buildRecipeData(receta, marta, image), buildBreadcrumbData(buildRecipeBreadcrumbs(receta), path)]
   };
   return result;
 };
@@ -85,6 +100,7 @@ const getRecipeSeo = (path: string, slug: string): IPageSeo | null => {
 const getDiarySeo = (path: string, slug: string): IPageSeo | null => {
   // #region Declaraciones
   const entrada = buscarEntradaDiario(slug);
+  const image = entrada ? photoUrl(fotoEntradaDiario(entrada)) : DEFAULT_IMAGE;
   // #endregion
 
   if (!entrada) {
@@ -95,8 +111,9 @@ const getDiarySeo = (path: string, slug: string): IPageSeo | null => {
     title: withSiteName(entrada.titulo),
     description: `${entrada.resumen} Del diario de entrenamiento de Fran.`,
     path,
+    image,
     type: PageType.Article,
-    structuredData: [buildBlogPostingData(entrada, fran, path), buildBreadcrumbData(buildDiaryBreadcrumbs(entrada), path)]
+    structuredData: [buildBlogPostingData(entrada, fran, path, image), buildBreadcrumbData(buildDiaryBreadcrumbs(entrada), path)]
   };
   return result;
 };

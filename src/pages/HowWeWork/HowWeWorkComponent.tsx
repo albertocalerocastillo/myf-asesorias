@@ -1,6 +1,7 @@
 // "Qué puedes esperar": todo lo que incluye la asesoría, sin precios (las tarifas se dan en privado).
 import { Link } from 'react-router-dom';
 import { ArrowRight, Check, Smartphone } from 'lucide-react';
+import QuizComponent from '../../components/sections/Quiz/QuizComponent';
 import FaqComponent from '../../components/sections/Faq/FaqComponent';
 import StepsComponent from '../../components/sections/Steps/StepsComponent';
 import RevealComponent from '../../components/ui/Reveal/RevealComponent';
@@ -23,7 +24,7 @@ const HowWeWorkComponent = () => (
       intro="Sin letra pequeña ni sorpresas: esto es lo que vas a encontrar desde el primer mensaje."
     >
       <div className="pt-6">
-        <StepsComponent />
+        <StepsComponent headingLevel="h2" />
       </div>
     </SectionComponent>
     {/* #endregion */}
@@ -82,12 +83,13 @@ const HowWeWorkComponent = () => (
     </SectionComponent>
     {/* #endregion */}
 
+    <QuizComponent />
+
     {/* #region Preguntas frecuentes */}
     <SectionComponent
       eyebrow="Dudas"
       title="Preguntas frecuentes"
       intro="Lo que más nos preguntan antes de empezar."
-      className="pt-0 sm:pt-0"
     >
       <FaqComponent />
       <p className="mt-8 text-center text-gris">
