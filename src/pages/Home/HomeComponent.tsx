@@ -30,6 +30,8 @@ import { entradasDiario, ordenarPorFecha } from '../../data/diario';
 const NUMERO_ULTIMAS_PUBLICACIONES = 3;
 const HERO_PHOTO_SIZES = '(min-width: 1024px) 360px, 60vw';
 const CAMINO_PHOTO_SIZES = '(min-width: 768px) 560px, 100vw';
+// Longitud de la circunferencia del sello (radio 38), para repartir el texto a lo largo de la vuelta.
+const SEAL_TEXT_LENGTH = 2 * Math.PI * 38;
 const TEAM_PHOTO_SIZES = '(min-width: 1280px) 1200px, 100vw';
 const REVEAL_STEP_MS = 120;
 
@@ -92,8 +94,11 @@ const HomeComponent = () => (
                 <path id="sello-circulo" d="M50 50 m-38 0 a38 38 0 1 1 76 0 a38 38 0 1 1 -76 0" />
               </defs>
               <circle cx="50" cy="50" r="50" fill="white" />
-              <text className="fill-tinta text-[10.5px] font-semibold tracking-[0.2em] uppercase">
-                <textPath href="#sello-circulo">Lo hemos vivido · Lo hemos vivido ·</textPath>
+              {/* El texto ocupa justo la vuelta entera (2·π·38): sin huecos ni letras montadas. */}
+              <text className="fill-tinta text-[9.5px] font-semibold uppercase">
+                <textPath href="#sello-circulo" textLength={SEAL_TEXT_LENGTH} lengthAdjust="spacing">
+                  Lo hemos vivido · Lo hemos vivido ·{' '}
+                </textPath>
               </text>
             </svg>
             <HeartIconComponent className="absolute inset-0 m-auto size-7 animate-latido text-corazon" />
