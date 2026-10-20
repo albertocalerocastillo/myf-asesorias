@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Paleta: crema cálido de fondo, coral "corazón" como acento,
+   verde salvia para Nutrición (Marta) y azul noche para Entrenamiento (Fran). */
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-titulo: "Fraunces", Georgia, serif;
+  --color-crema: #faf6f0;
+  --color-arena: #f1e9dd;
+  --color-tinta: #1f2421;
+  --color-gris: #5f6661;
+  --color-corazon: #e4572e;
+  --color-corazon-oscuro: #c2401b;
+  --color-salvia: #5b8c5a;
+  --color-salvia-claro: #e3eee1;
+  --color-noche: #1f3a5f;
+  --color-noche-claro: #e1e8f2;
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body { background: var(--color-crema); color: var(--color-tinta); }
+
+h1, h2, h3, .titulo { font-family: var(--font-titulo); letter-spacing: -0.01em; }
+
+/* Texto largo (historias, recetas, entradas del diario) */
+.prosa p { margin-bottom: 1.1em; line-height: 1.75; }
+.prosa p:last-child { margin-bottom: 0; }
