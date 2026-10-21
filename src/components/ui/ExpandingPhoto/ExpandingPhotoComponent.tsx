@@ -26,7 +26,7 @@ const ExpandingPhotoComponent = ({ photo, label, tone = Tone.Olive, children }: 
 
   // #region Renderizado
   return (
-    <div ref={ref} className="relative h-[200vh]">
+    <div ref={ref} className="relative h-[160vh] sm:h-[200vh]">
       <div className="sticky top-0 h-svh overflow-hidden">
         <m.div className="absolute inset-0" style={{ clipPath }}>
           <m.div className="size-full" style={{ scale: photoScale }}>

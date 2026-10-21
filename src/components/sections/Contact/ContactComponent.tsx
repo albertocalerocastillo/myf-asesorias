@@ -52,7 +52,8 @@ const ContactComponent = () => {
                     label={persona.nombre}
                     tone={persona.tono}
                     sizes={AVATAR_SIZES}
-                    className="size-20 rounded-full text-[0px] [&_svg]:size-5"
+                    compact
+                    className="size-20 rounded-full"
                   />
                   <span className="absolute -right-1 -bottom-1 grid size-8 place-items-center rounded-full bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white ring-4 ring-acento-oscuro">
                     <InstagramIconComponent className="size-4" />

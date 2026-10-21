@@ -70,7 +70,7 @@ const RecipeComponent = () => {
             sizes={HEADER_PHOTO_SIZES}
             priority
             transitionName={photoTransitionName('receta', receta.slug)}
-            className="aspect-[4/5] rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_80px_-30px_rgb(45_48_33/0.45)]"
+            className="aspect-[4/3] rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_80px_-30px_rgb(45_48_33/0.45)] sm:aspect-[4/5]"
           />
         </header>
 

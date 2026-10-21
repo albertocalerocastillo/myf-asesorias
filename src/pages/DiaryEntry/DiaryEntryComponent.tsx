@@ -74,7 +74,8 @@ const DiaryEntryComponent = () => {
             label={fran.nombre}
             tone={Tone.Earth}
             sizes={AVATAR_SIZES}
-            className="size-20 shrink-0 rounded-full bg-white/70 text-[0px]"
+            compact
+            className="size-20 shrink-0 rounded-full bg-white/70"
           />
           <div className="flex-1">
             <p className="titulo text-xl">Escrito por {fran.nombre}</p>

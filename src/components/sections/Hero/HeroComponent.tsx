@@ -54,16 +54,17 @@ const HeroComponent = () => {
       <LeafComponent className="absolute right-[40%] bottom-10 hidden size-24 text-acento-suave/40 lg:block" parallax={-80} rotate={140} sway />
       <LeafComponent className="absolute top-20 right-4 size-20 text-tierra/15 lg:hidden" parallax={60} rotate={60} />
 
-      <div className="contenedor grid min-h-[calc(100svh-4rem)] items-center gap-14 pt-8 pb-24 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pt-4">
+      {/* En escritorio ocupa la primera pantalla; en el móvil, la foto va justo debajo del texto para que asome. */}
+      <div className="contenedor grid items-center gap-10 pt-6 pb-20 sm:pt-8 lg:min-h-[calc(100svh-4.5rem)] lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:pt-4 lg:pb-24">
         <m.div style={{ y: textY, opacity: textOpacity }} className="relative z-10">
           <div className="entra" style={enterOrder(0)}>
             <EyebrowComponent text="Entrenamiento · Nutrición" />
           </div>
           <AnimatedHeadingComponent
             parts={HEADING}
-            className="titulo-grande mb-8 text-[3.1rem] leading-[0.98] min-[400px]:text-6xl sm:text-7xl xl:text-[5.75rem]"
+            className="titulo-grande mb-5 text-[3.1rem] leading-[0.98] min-[400px]:text-6xl sm:text-7xl xl:text-[5.75rem] sm:mb-8"
           />
-          <p className="entra mb-10 max-w-xl text-lg leading-relaxed text-gris sm:text-xl" style={enterOrder(2)}>
+          <p className="entra mb-7 max-w-xl text-lg leading-relaxed text-gris sm:mb-10 sm:text-xl" style={enterOrder(2)}>
             Somos Marta y Fran. Los dos pasamos por una operación de corazón y hoy te ayudamos a comer mejor y a entrenar
             con cabeza: un plan hecho para ti y trato directo con nosotros.
           </p>
@@ -75,7 +76,7 @@ const HeroComponent = () => {
               Cómo funciona
             </ButtonComponent>
           </div>
-          <ul className="entra mt-12 flex flex-wrap gap-x-6 gap-y-3 text-sm text-gris" style={enterOrder(4)}>
+          <ul className="entra mt-7 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gris sm:mt-12 sm:gap-y-3" style={enterOrder(4)}>
             {TRUST_POINTS.map((point) => (
               <li key={point.text} className="flex items-center gap-2">
                 <point.icon className="size-4 text-oliva" aria-hidden="true" /> {point.text}
@@ -111,7 +112,8 @@ const HeroComponent = () => {
                   label={chip.persona.nombre}
                   tone={chip.persona.tono}
                   sizes={AVATAR_SIZES}
-                  className="size-11 shrink-0 rounded-full text-[0px] [&_svg]:size-4"
+                  compact
+                  className="size-11 shrink-0 rounded-full"
                 />
                 <span className="text-sm leading-tight">
                   <span className="titulo block text-base">{chip.persona.nombre}</span>

@@ -5,6 +5,7 @@ import { useRef } from 'react';
 import {
   m,
   useAnimationFrame,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -22,6 +23,9 @@ const MAX_SKEW_DEGREES = 6;
 
 const VelocityTextComponent = ({ children, baseSpeed, className = '' }: IVelocityTextProps) => {
   // #region Declaraciones
+  const containerRef = useRef<HTMLDivElement>(null);
+  // Fuera de la pantalla no se calcula nada (ahorra batería en el móvil).
+  const inView = useInView(containerRef);
   const reducedMotion = useReducedMotion();
   const offset = useMotionValue(0);
   const direction = useRef<number>(1);
@@ -35,7 +39,7 @@ const VelocityTextComponent = ({ children, baseSpeed, className = '' }: IVelocit
 
   // #region Efectos
   useAnimationFrame((_, delta) => {
-    if (reducedMotion) {
+    if (reducedMotion || !inView) {
       return;
     }
     const factor = speedFactor.get();
@@ -51,7 +55,7 @@ const VelocityTextComponent = ({ children, baseSpeed, className = '' }: IVelocit
 
   // #region Renderizado
   return (
-    <div className="overflow-hidden">
+    <div ref={containerRef} className="overflow-hidden">
       <m.div className={`flex w-max ${className}`} style={{ x, skewX }}>
         {Array.from({ length: COPIES }, (_, index) => (
           <div key={index} aria-hidden={index > 0} className="flex shrink-0 items-center">
