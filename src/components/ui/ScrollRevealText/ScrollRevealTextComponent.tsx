@@ -30,8 +30,9 @@ const ScrollRevealTextComponent = ({ eyebrow, parts }: IScrollRevealTextProps) =
   // #endregion
 
   // #region Renderizado
+  // Recorrido del efecto: algo más corto en el móvil, para no pedir tanto scroll con el dedo.
   return (
-    <div ref={ref} className="relative h-[220vh]">
+    <div ref={ref} className="relative h-[170vh] sm:h-[220vh]">
       <div className="sticky top-0 flex h-svh items-center">
         <div className="contenedor">
           <EyebrowComponent text={eyebrow} />
