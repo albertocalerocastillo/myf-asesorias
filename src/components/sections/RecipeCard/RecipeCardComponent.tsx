@@ -22,17 +22,17 @@ const RecipeCardComponent = ({ receta }: IRecipeCardProps) => {
 
   // #region Renderizado
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-oliva/10">
-      <div className="relative overflow-hidden">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-oliva/10">
+      <div className="relative m-3 mb-0 overflow-hidden rounded-t-[999px] rounded-b-2xl">
         <PhotoComponent
           photo={fotoReceta(receta)}
           label={receta.titulo}
           tone={Tone.Olive}
           sizes={CARD_PHOTO_SIZES}
           transitionName={photoTransitionName('receta', receta.slug)}
-          className="aspect-[4/3] rounded-none transition duration-500 group-hover:scale-105"
+          className="aspect-[4/3] rounded-none transition duration-700 ease-[var(--ease-suave)] group-hover:scale-110"
         />
-        <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-tinta backdrop-blur">
+        <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-sm font-semibold text-tinta backdrop-blur">
           <Clock className="size-4 text-oliva" aria-hidden="true" /> {receta.minutos} min
         </span>
       </div>
@@ -42,7 +42,7 @@ const RecipeCardComponent = ({ receta }: IRecipeCardProps) => {
             <TagComponent key={etiqueta} label={etiqueta} />
           ))}
         </div>
-        <h3 className="text-xl font-bold">
+        <h3 className="text-2xl leading-tight">
           {/* El enlace cubre toda la tarjeta, pero el texto del enlace es solo el título (mejor para lectores de pantalla). */}
           <Link to={route} onClick={handleClick} className="after:absolute after:inset-0 group-hover:text-oliva">
             {receta.titulo}

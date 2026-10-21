@@ -1,112 +1,106 @@
-// Cabecera de las páginas de Nutrición y Entrenamiento: presentación, historia y forma de trabajar.
+// Cabecera de las páginas de Nutrición y Entrenamiento: presentación con foto en arco, su historia
+// (que se enciende palabra a palabra al bajar) y cómo trabaja, en pasos numerados.
 // Las dos páginas son iguales salvo el color, que sale del tono de cada persona.
-import { ArrowDown, Check, HeartPulse } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 import AnimatedHeadingComponent from '../../ui/AnimatedHeading/AnimatedHeadingComponent';
 import ButtonComponent from '../../ui/Button/ButtonComponent';
-import HeartbeatComponent from '../../ui/Heartbeat/HeartbeatComponent';
+import EyebrowComponent from '../../ui/Eyebrow/EyebrowComponent';
+import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
 import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
+import LeafComponent from '../../ui/Leaf/LeafComponent';
 import PhotoComponent from '../../ui/Photo/PhotoComponent';
 import RevealComponent from '../../ui/Reveal/RevealComponent';
+import ScrollRevealTextComponent from '../../ui/ScrollRevealText/ScrollRevealTextComponent';
+import SealComponent from '../../ui/Seal/SealComponent';
+import { Tone } from '../../../enums/Tone';
 import { obtenerUrlInstagram } from '../../../data/equipo';
 import { fotoPersona } from '../../../data/fotos';
-import { enterOrder, parallaxOffset } from '../../../theme/animation';
+import { enterOrder } from '../../../theme/animation';
 import { toneStyles } from '../../../theme/toneStyles';
 import type { IProfileIntroProps } from './IProfileIntroProps';
 
-
-const PROFILE_PHOTO_SIZES = '(min-width: 768px) 480px, 100vw';
+const PROFILE_PHOTO_SIZES = '(min-width: 1024px) 440px, 80vw';
+const REVEAL_STEP_MS = 100;
+const NUMBER_DIGITS = 2;
 
 const ProfileIntroComponent = ({ persona, contentAnchor }: IProfileIntroProps) => {
   // #region Declaraciones
   const tone = toneStyles[persona.tono];
+  const historia = persona.historia.map((parrafo) => ({ text: parrafo }));
   // #endregion
 
   // #region Renderizado
   return (
     <>
       {/* #region Presentación */}
-      <section className="contenedor relative grid items-center gap-14 pt-8 pb-16 md:grid-cols-[1.1fr_1fr] md:pt-16 md:pb-24">
-        <div>
-          <p
-            className={`entra mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold ${tone.soft} ${tone.text}`}
-            style={enterOrder(0)}
-          >
-            {persona.area}
-          </p>
-          <AnimatedHeadingComponent
-            parts={[{ text: 'Hola, soy' }, { text: persona.nombre, className: tone.text }]}
-            className="mb-6 text-5xl leading-[1.05] font-bold sm:text-7xl"
-          />
-          <p className="entra titulo mb-10 max-w-xl text-2xl leading-snug text-gris italic sm:text-3xl" style={enterOrder(1)}>
-            “{persona.frase}”
-          </p>
-          <div className="entra flex flex-col gap-3 sm:flex-row" style={enterOrder(2)}>
-            <ButtonComponent href={obtenerUrlInstagram(persona.instagram)} tone={persona.tono}>
-              <InstagramIconComponent /> Escríbeme
-            </ButtonComponent>
-            <a
-              href={`#${contentAnchor}`}
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-tinta/15 px-6 py-3.5 font-semibold transition hover:border-tinta/40"
-            >
-              Ver mi {persona.seccionContenido.toLowerCase()} <ArrowDown className="size-4" aria-hidden="true" />
-            </a>
-          </div>
-        </div>
+      <section className="relative -mt-16 overflow-hidden pt-16 lg:-mt-18 lg:pt-18">
+        <div aria-hidden="true" className={`absolute inset-0 -z-10 rounded-b-[4rem] ${tone.soft} opacity-60`} />
+        <LeafComponent className="absolute top-24 -right-8 size-40 text-oliva/15 sm:size-56" parallax={100} rotate={150} sway />
 
-        <div className="entra relative mx-auto w-full max-w-md md:max-w-none" style={enterOrder(3)}>
-          <div className="paralaje" style={parallaxOffset(-24)}>
+        <div className="contenedor grid items-center gap-16 pt-10 pb-20 lg:grid-cols-[1.15fr_1fr] lg:pt-16 lg:pb-28">
+          <div>
+            <div className="entra" style={enterOrder(0)}>
+              <EyebrowComponent text={persona.area} />
+            </div>
+            <AnimatedHeadingComponent
+              parts={[{ text: 'Hola, soy' }, { text: persona.nombre, className: `italic ${tone.text}` }]}
+              className="titulo-grande mb-8 text-6xl leading-[0.95] sm:text-7xl xl:text-8xl"
+            />
+            <p className="entra titulo mb-10 max-w-xl text-2xl leading-snug text-gris italic sm:text-3xl" style={enterOrder(1)}>
+              “{persona.frase}”
+            </p>
+            <div className="entra flex flex-col gap-3 sm:flex-row sm:items-center" style={enterOrder(2)}>
+              <ButtonComponent href={obtenerUrlInstagram(persona.instagram)} tone={persona.tono} withArrow magnetic large>
+                <InstagramIconComponent /> Escríbeme
+              </ButtonComponent>
+              <ButtonComponent href={`#${contentAnchor}`} tone={Tone.Outline} large>
+                Ver mi {persona.seccionContenido.toLowerCase()} <ArrowDown className="size-4" aria-hidden="true" />
+              </ButtonComponent>
+            </div>
+          </div>
+
+          <div className="entra relative mx-auto w-full max-w-[20rem] sm:max-w-sm lg:max-w-[26rem]" style={enterOrder(3)}>
+            <div aria-hidden="true" className="absolute inset-0 translate-x-4 -translate-y-4 rounded-t-full rounded-b-[2.5rem] border border-acento-suave sm:translate-x-6 sm:-translate-y-6" />
             <PhotoComponent
               photo={fotoPersona(persona)}
               label={persona.nombre}
               tone={persona.tono}
               sizes={PROFILE_PHOTO_SIZES}
               priority
-              className="aspect-[4/5] rounded-[2rem] shadow-2xl"
+              className="relative aspect-[4/5] max-h-[68svh] w-full rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_80px_-30px_rgb(45_48_33/0.45)]"
             />
-          </div>
-          <div className="absolute -bottom-5 left-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-6">
-            <span className="grid size-10 place-items-center rounded-full bg-acento-claro text-acento">
-              <HeartPulse className="size-5" aria-hidden="true" />
-            </span>
-            <span className="text-sm leading-tight">
-              <span className="block font-semibold">Operación de corazón</span>
-              <span className="text-gris">Lo he vivido en primera persona</span>
-            </span>
+            <SealComponent text="Lo he vivido" className="absolute -bottom-6 -left-6 size-24 sm:size-28">
+              <HeartIconComponent className={`size-7 animate-latido ${tone.text}`} />
+            </SealComponent>
           </div>
         </div>
       </section>
       {/* #endregion */}
 
-      {/* #region Historia y forma de trabajar */}
-      <section className="relative overflow-hidden bg-white">
-        <HeartbeatComponent className={`pointer-events-none absolute inset-x-0 top-0 h-16 w-full opacity-30 ${tone.text}`} />
-        <div className="contenedor relative grid gap-14 py-20 md:grid-cols-[3fr_2fr] md:gap-20">
-          <RevealComponent>
-            <p className={`mb-3 text-sm font-semibold tracking-widest uppercase ${tone.text}`}>Mi historia</p>
-            <h2 className="mb-6 text-3xl font-bold sm:text-4xl">Por qué me dedico a esto</h2>
-            <div className="prosa text-lg text-gris">
-              {persona.historia.map((parrafo) => (
-                <p key={parrafo}>{parrafo}</p>
-              ))}
-            </div>
-            <p className="mt-8 inline-flex items-center gap-2 rounded-full bg-arena px-4 py-2 text-sm font-medium">{persona.titulacion}</p>
-          </RevealComponent>
+      {/* #region Mi historia (se enciende al bajar). PENDIENTE: su historia real. */}
+      <ScrollRevealTextComponent eyebrow="Mi historia" parts={historia} />
+      {/* #endregion */}
 
-          <RevealComponent delay={150}>
-            <div className={`rounded-3xl p-8 ${tone.soft}`}>
-              <h2 className="mb-6 text-2xl font-bold">Cómo trabajo contigo</h2>
-              <ul className="space-y-4">
-                {persona.enfoque.map((punto) => (
-                  <li key={punto} className="flex gap-3">
-                    <span className={`mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-white ${tone.text}`}>
-                      <Check className="size-4" aria-hidden="true" />
-                    </span>
-                    <span className="leading-relaxed">{punto}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      {/* #region Cómo trabajo contigo */}
+      <section className="contenedor pb-24 sm:pb-32">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-20">
+          <RevealComponent>
+            <EyebrowComponent text="Cómo trabajo" />
+            <h2 className="titulo-seccion mb-6 text-4xl leading-[1.05] sm:text-5xl">
+              Así trabajo <em>contigo</em>
+            </h2>
+            <p className="inline-flex rounded-full bg-arena px-4 py-2 text-sm font-medium">{persona.titulacion}</p>
           </RevealComponent>
+          <ol className="divide-y divide-tinta/10 border-y border-tinta/10">
+            {persona.enfoque.map((punto, index) => (
+              <li key={punto}>
+                <RevealComponent delay={index * REVEAL_STEP_MS} className="flex items-baseline gap-6 py-6">
+                  <span className={`titulo text-3xl ${tone.text}`}>{String(index + 1).padStart(NUMBER_DIGITS, '0')}</span>
+                  <span className="text-lg leading-relaxed sm:text-xl">{punto}</span>
+                </RevealComponent>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
       {/* #endregion */}

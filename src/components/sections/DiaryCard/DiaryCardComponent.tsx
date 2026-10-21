@@ -21,15 +21,15 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
 
   // #region Renderizado
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-tierra/10">
-      <div className="overflow-hidden">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-[2rem] has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-tierra/10">
+      <div className="relative m-3 mb-0 overflow-hidden rounded-t-[999px] rounded-b-2xl">
         <PhotoComponent
           photo={fotoEntradaDiario(entrada)}
           label={entrada.titulo}
           tone={Tone.Earth}
           sizes={CARD_PHOTO_SIZES}
           transitionName={photoTransitionName('diario', entrada.slug)}
-          className="aspect-[4/3] rounded-none transition duration-500 group-hover:scale-105"
+          className="aspect-[4/3] rounded-none transition duration-700 ease-[var(--ease-suave)] group-hover:scale-110"
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
@@ -40,7 +40,7 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
             <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min
           </span>
         </p>
-        <h3 className="text-xl font-bold">
+        <h3 className="text-2xl leading-tight">
           {/* El enlace cubre toda la tarjeta, pero el texto del enlace es solo el título (mejor para lectores de pantalla). */}
           <Link to={route} onClick={handleClick} className="after:absolute after:inset-0 group-hover:text-tierra">
             {entrada.titulo}

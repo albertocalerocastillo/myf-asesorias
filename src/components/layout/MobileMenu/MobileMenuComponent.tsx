@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import HeartbeatComponent from '../../ui/Heartbeat/HeartbeatComponent';
+import LeafShapeComponent from '../../ui/Leaf/LeafShapeComponent';
 import InstagramIconComponent from '../../ui/Icons/InstagramIconComponent';
 import { MENU_LINKS } from '../navigation';
 import { AppAnchor, AppRoute } from '../../../enums/AppRoute';
@@ -71,7 +71,7 @@ const MobileMenuComponent = ({ open, onClose }: IMobileMenuProps) => {
         open ? 'visible' : 'invisible'
       }`}
     >
-      <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full text-acento/10" />
+      <LeafShapeComponent className="pointer-events-none absolute -right-16 bottom-32 size-72 -rotate-12 text-oliva/10" />
 
       <ul className="relative space-y-1">
         {MENU_LINKS.map((link, index) => (

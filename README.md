@@ -5,8 +5,8 @@ operadas de corazón.
 
 ## Tecnología
 
-React 19 · TypeScript · Vite · Tailwind CSS 4 · React Router · prerenderizado propio (SSG) ·
-View Transitions API · Screen Wake Lock API · sharp (fotos).
+React 19 · TypeScript · Vite · Tailwind CSS 4 · React Router · Motion (animaciones) ·
+prerenderizado propio (SSG) · View Transitions API · Screen Wake Lock API · sharp (fotos).
 
 ```bash
 npm install
@@ -22,6 +22,21 @@ npm run lint:fix   # aplica la guía de estilos
 Cloudflare (Workers, plan gratuito) está conectado a este repositorio: cada push a `master` compila
 y publica la web automáticamente. Las cabeceras de seguridad y caché están en `public/_headers`.
 También se puede publicar a mano con `npm run deploy`.
+
+## Diseño y animaciones
+
+Estética sacada del logo: crema, verde oliva y tostado, textura de papel, fotos en arco y la ramita
+de hojas como motivo. Las animaciones usan [Motion](https://motion.dev) con `LazyMotion` (solo lo
+necesario) y `MotionConfig reducedMotion="user"` (respeta "reducir movimiento"):
+
+- `ScrollRevealTextComponent`: párrafo que se enciende palabra a palabra con el scroll.
+- `ExpandingPhotoComponent`: foto que pasa de arco a pantalla completa (clip-path).
+- `WhyUsComponent`: en escritorio, scroll vertical convertido en desplazamiento horizontal.
+- `VelocityTextComponent`: cinta que acelera y se inclina según la velocidad del scroll.
+- `TiltCardComponent` y `MagneticComponent`: inclinación 3D y botones magnéticos (solo con ratón).
+- `StepsComponent`: línea de pasos que se dibuja con el scroll.
+
+Todos los colores con texto cumplen contraste AA (también el gris de partida del texto animado).
 
 ## Fotos
 

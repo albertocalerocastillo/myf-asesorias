@@ -46,7 +46,7 @@ const RecipeComponent = () => {
                 <TagComponent key={etiqueta} label={etiqueta} />
               ))}
             </div>
-            <h1 className="mb-4 text-4xl leading-tight font-bold sm:text-5xl">{receta.titulo}</h1>
+            <h1 className="titulo-grande mb-5 text-5xl leading-[1.02] sm:text-6xl">{receta.titulo}</h1>
             <p className="mb-8 text-xl leading-relaxed text-gris">{receta.resumen}</p>
             <dl className="mb-6 grid grid-cols-3 gap-3 text-center">
               {[
@@ -70,7 +70,7 @@ const RecipeComponent = () => {
             sizes={HEADER_PHOTO_SIZES}
             priority
             transitionName={photoTransitionName('receta', receta.slug)}
-            className="aspect-square rounded-[2rem] shadow-xl"
+            className="aspect-[4/5] rounded-t-full rounded-b-[2.5rem] shadow-[0_40px_80px_-30px_rgb(45_48_33/0.45)]"
           />
         </header>
 
@@ -87,7 +87,7 @@ const RecipeComponent = () => {
       {relacionadas.length > 0 && (
         <section className="bg-white">
           <div className="contenedor py-16">
-            <h2 className="mb-8 text-3xl font-bold">Más recetas</h2>
+            <h2 className="mb-8 text-3xl">Más recetas</h2>
             <CarouselComponent
               label="Más recetas"
               gridClassName="sm:grid-cols-2 lg:grid-cols-3"

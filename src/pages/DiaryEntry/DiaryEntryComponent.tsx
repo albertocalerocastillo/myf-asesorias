@@ -49,7 +49,7 @@ const DiaryEntryComponent = () => {
               <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min de lectura
             </span>
           </p>
-          <h1 className="mb-6 text-4xl leading-tight font-bold sm:text-6xl">{entrada.titulo}</h1>
+          <h1 className="titulo-grande mb-6 text-5xl leading-[1.02] sm:text-7xl">{entrada.titulo}</h1>
           <p className="mb-6 text-xl leading-relaxed text-gris sm:text-2xl">{entrada.resumen}</p>
           <ShareButtonComponent title={`${entrada.titulo}, del diario de ${fran.nombre}`} path={buildDiaryRoute(entrada.slug)} />
         </header>
@@ -60,7 +60,7 @@ const DiaryEntryComponent = () => {
           sizes={HEADER_PHOTO_SIZES}
           priority
           transitionName={photoTransitionName('diario', entrada.slug)}
-          className="mb-12 aspect-[16/9] rounded-[2rem] shadow-xl"
+          className="mb-14 aspect-[16/10] rounded-t-[999px] rounded-b-[2.5rem] shadow-[0_40px_80px_-30px_rgb(45_48_33/0.45)]"
         />
         <div className="prosa text-lg sm:text-xl">
           {entrada.texto.map((parrafo) => (
@@ -77,7 +77,7 @@ const DiaryEntryComponent = () => {
             className="size-20 shrink-0 rounded-full bg-white/70 text-[0px]"
           />
           <div className="flex-1">
-            <p className="titulo text-xl font-bold">Escrito por {fran.nombre}</p>
+            <p className="titulo text-xl">Escrito por {fran.nombre}</p>
             <p className="text-gris">{fran.frase}</p>
           </div>
           <ButtonComponent href={obtenerUrlInstagram(fran.instagram)} tone={Tone.Earth}>
@@ -89,7 +89,7 @@ const DiaryEntryComponent = () => {
       {relacionadas.length > 0 && (
         <section className="bg-white">
           <div className="contenedor py-16">
-            <h2 className="mb-8 text-3xl font-bold">Sigue leyendo</h2>
+            <h2 className="mb-8 text-3xl">Sigue leyendo</h2>
             <CarouselComponent
               label="Más entradas del diario"
               gridClassName="sm:grid-cols-2 lg:grid-cols-3"

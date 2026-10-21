@@ -5,5 +5,7 @@ export enum Tone {
   Olive = 'olive',
   Earth = 'earth',
   Sand = 'sand',
-  Outline = 'outline'
+  Outline = 'outline',
+  // Botón claro para fondos oscuros.
+  Light = 'light'
 }

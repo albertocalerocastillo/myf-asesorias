@@ -1,25 +1,30 @@
-// Cinta de frases que se desliza sin fin. El contenido va dos veces para que el bucle no tenga salto;
-// la segunda copia se oculta a los lectores de pantalla.
-import HeartIconComponent from '../../ui/Icons/HeartIconComponent';
+// Dos cintas de frases cruzadas en diagonal, moviéndose en sentidos opuestos y reaccionando al scroll.
+// La de atrás es decorativa (repite las mismas frases) y se oculta a los lectores de pantalla.
+import { Fragment } from 'react';
+import LeafShapeComponent from '../../ui/Leaf/LeafShapeComponent';
+import VelocityTextComponent from '../../ui/VelocityText/VelocityTextComponent';
 import { frasesCinta } from '../../../data/servicio';
 
-const COPIES = [false, true];
+const SPEED_PERCENT_PER_SECOND = 1.2;
+const LEAF_ROTATION = { rotate: '-30deg' };
+
+const renderPhrases = (leafClassName: string) =>
+  frasesCinta.map((frase) => (
+    <Fragment key={frase}>
+      <span className="titulo px-6 text-3xl whitespace-nowrap italic sm:px-10 sm:text-5xl">{frase}</span>
+      <LeafShapeComponent className={`size-7 shrink-0 sm:size-9 ${leafClassName}`} style={LEAF_ROTATION} />
+    </Fragment>
+  ));
 
 const MarqueeComponent = () => (
-  <div className="cinta-contenedor overflow-hidden border-y border-tinta/10 bg-acento py-5 text-white sm:py-6">
-    <div className="cinta">
-      {COPIES.map((isCopy) => (
-        <ul key={`${isCopy}`} aria-hidden={isCopy} className="flex shrink-0 items-center">
-          {frasesCinta.map((frase) => (
-            <li key={frase} className="flex items-center">
-              <span className="titulo px-6 text-2xl font-semibold whitespace-nowrap italic sm:px-8 sm:text-4xl">{frase}</span>
-              <HeartIconComponent className="size-5 shrink-0 text-white/60 sm:size-6" />
-            </li>
-          ))}
-        </ul>
-      ))}
+  <section aria-label="Lo que nos define" className="relative overflow-hidden py-14 sm:py-20">
+    <div aria-hidden="true" className="absolute inset-x-0 top-1/2 -mx-4 -translate-y-1/2 rotate-2 bg-arena-oscura py-5 text-tierra sm:py-6">
+      <VelocityTextComponent baseSpeed={-SPEED_PERCENT_PER_SECOND}>{renderPhrases('text-oliva/50')}</VelocityTextComponent>
     </div>
-  </div>
+    <div className="relative -mx-4 -rotate-2 bg-acento py-5 text-crema shadow-[0_20px_50px_-20px_rgb(45_48_33/0.5)] sm:py-6">
+      <VelocityTextComponent baseSpeed={SPEED_PERCENT_PER_SECOND}>{renderPhrases('text-acento-suave')}</VelocityTextComponent>
+    </div>
+  </section>
 );
 
 export default MarqueeComponent;
