@@ -62,7 +62,7 @@ const HowWeWorkComponent = () => (
       <RevealComponent>
         <div className="grid gap-10 overflow-hidden rounded-[2rem] bg-tinta p-8 text-crema sm:p-12 md:grid-cols-[1.2fr_1fr] md:items-center">
           <div>
-            <span className="mb-6 grid size-14 place-items-center rounded-2xl bg-corazon text-white">
+            <span className="mb-6 grid size-14 place-items-center rounded-2xl bg-acento text-white">
               <Smartphone className="size-7" aria-hidden="true" />
             </span>
             <h2 className="mb-4 text-3xl font-bold sm:text-4xl">Todo en tu móvil, con la app Jarvis</h2>
@@ -74,7 +74,7 @@ const HowWeWorkComponent = () => (
           <ul className="grid gap-3">
             {JARVIS_INCLUYE.map((item) => (
               <li key={item} className="flex items-center gap-3 rounded-2xl bg-white/5 px-5 py-4 font-medium">
-                <Check className="size-5 text-[#f08a63]" aria-hidden="true" /> {item}
+                <Check className="size-5 text-acento-suave" aria-hidden="true" /> {item}
               </li>
             ))}
           </ul>
@@ -94,7 +94,7 @@ const HowWeWorkComponent = () => (
       <FaqComponent />
       <p className="mt-8 text-center text-gris">
         ¿Tienes otra duda?{' '}
-        <a href={`#${AppAnchor.Contact}`} className="font-semibold text-corazon hover:underline">
+        <a href={`#${AppAnchor.Contact}`} className="font-semibold text-acento hover:underline">
           Pregúntanos directamente
         </a>
         .

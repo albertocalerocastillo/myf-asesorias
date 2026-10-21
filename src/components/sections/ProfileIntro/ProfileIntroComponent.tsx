@@ -65,7 +65,7 @@ const ProfileIntroComponent = ({ persona, contentAnchor }: IProfileIntroProps) =
             />
           </div>
           <div className="absolute -bottom-5 left-3 flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl sm:-left-6">
-            <span className="grid size-10 place-items-center rounded-full bg-corazon-claro text-corazon">
+            <span className="grid size-10 place-items-center rounded-full bg-acento-claro text-acento">
               <HeartPulse className="size-5" aria-hidden="true" />
             </span>
             <span className="text-sm leading-tight">

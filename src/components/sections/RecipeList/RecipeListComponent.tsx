@@ -14,7 +14,7 @@ const RecipeListComponent = () => {
 
   const getChipClasses = (active: boolean): string =>
     `al-tocar rounded-full px-4 py-2.5 text-sm font-semibold ${
-      active ? 'bg-salvia text-white shadow-md shadow-salvia/20' : 'border border-tinta/10 bg-white text-tinta hover:border-salvia hover:text-salvia'
+      active ? 'bg-oliva text-white shadow-md shadow-oliva/20' : 'border border-tinta/10 bg-white text-tinta hover:border-oliva hover:text-oliva'
     }`;
   // #endregion
 

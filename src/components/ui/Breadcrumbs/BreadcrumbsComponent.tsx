@@ -10,7 +10,7 @@ const BreadcrumbsComponent = ({ items }: IBreadcrumbsProps) => (
         <li key={item.label} className="flex items-center gap-1.5">
           {index > 0 && <ChevronRight className="size-3.5 opacity-50" aria-hidden="true" />}
           {item.to ? (
-            <Link to={item.to} className="underline-offset-4 hover:text-corazon hover:underline">
+            <Link to={item.to} className="underline-offset-4 hover:text-acento hover:underline">
               {item.label}
             </Link>
           ) : (

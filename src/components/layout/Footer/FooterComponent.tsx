@@ -12,11 +12,11 @@ const FOOTER_LINKS = [
 ];
 
 const FooterComponent = () => (
-  <footer className="border-t border-white/10 bg-tinta text-sm text-crema/65">
+  <footer className="border-t border-tinta/10 bg-arena text-sm text-gris">
     <div className="contenedor grid gap-10 py-12 md:grid-cols-[2fr_1fr_1fr]">
       <div>
         <Link to={AppRoute.Home} className="mb-4 inline-block" aria-label={`${marca.nombre}, ir al inicio`}>
-          <img src={LOGO_FULL} alt="" width={160} height={165} loading="lazy" className="h-auto w-40" />
+          <img src={LOGO_FULL} alt="" width={176} height={138} loading="lazy" className="h-auto w-44" />
         </Link>
         {/* Aviso de salud: la web divulga, no diagnostica. */}
         <p className="max-w-md leading-relaxed">
@@ -26,22 +26,22 @@ const FooterComponent = () => (
       </div>
 
       <nav aria-label="Pie de página">
-        <p className="mb-3 font-semibold text-crema">La web</p>
+        <p className="mb-3 font-semibold text-tinta">La web</p>
         <ul className="space-y-2">
           {FOOTER_LINKS.map((link) => (
             <li key={link.to}>
-              <Link to={link.to} className="hover:text-crema">{link.label}</Link>
+              <Link to={link.to} className="inline-block py-1 hover:text-acento">{link.label}</Link>
             </li>
           ))}
         </ul>
       </nav>
 
       <div>
-        <p className="mb-3 font-semibold text-crema">Síguenos</p>
+        <p className="mb-3 font-semibold text-tinta">Síguenos</p>
         <ul className="space-y-2">
           {personas.map((persona) => (
             <li key={persona.nombre}>
-              <a href={obtenerUrlInstagram(persona.instagram)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-crema">
+              <a href={obtenerUrlInstagram(persona.instagram)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 py-1 hover:text-acento">
                 <InstagramIconComponent className="size-4" /> {persona.nombre}
               </a>
             </li>
@@ -49,7 +49,7 @@ const FooterComponent = () => (
         </ul>
       </div>
     </div>
-    <div className="contenedor border-t border-white/10 py-6">
+    <div className="contenedor border-t border-tinta/10 py-6">
       {/* PENDIENTE: enlaces a aviso legal y privacidad cuando tengamos sus datos. */}
       <p>© {new Date().getFullYear()} {marca.nombre}. Hecho con cariño.</p>
     </div>

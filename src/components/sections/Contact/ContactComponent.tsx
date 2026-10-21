@@ -18,10 +18,10 @@ const ContactComponent = () => {
   // #region Renderizado
   return (
     <section id={AppAnchor.Contact} aria-labelledby="contacto-titulo" className="relative overflow-hidden bg-tinta text-crema">
-      <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-10 h-24 w-full text-corazon/25" />
+      <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-10 h-24 w-full text-acento/25" />
       <div className="contenedor relative py-20 sm:py-28">
         <RevealComponent className="max-w-2xl">
-          <p className="mb-3 text-sm font-semibold tracking-widest text-[#f08a63] uppercase">El primer paso es el más fácil</p>
+          <p className="mb-3 text-sm font-semibold tracking-widest text-acento-suave uppercase">El primer paso es el más fácil</p>
           <h2 id="contacto-titulo" className="mb-5 text-4xl font-bold sm:text-6xl">
             Cuéntanos tu caso
           </h2>
@@ -59,7 +59,7 @@ const ContactComponent = () => {
           {whatsappUrl && (
             <>
               {' '}
-              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="font-semibold text-[#f08a63] hover:underline">
+              <a href={whatsappUrl} target="_blank" rel="noreferrer" className="font-semibold text-acento-suave hover:underline">
                 También por WhatsApp.
               </a>
             </>

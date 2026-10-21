@@ -52,7 +52,7 @@ const QuizComponent = () => {
 
   // #region Renderizado
   return (
-    <section aria-labelledby="test-titulo" className="relative overflow-hidden bg-gradient-to-br from-corazon to-corazon-oscuro text-white">
+    <section aria-labelledby="test-titulo" className="relative overflow-hidden bg-gradient-to-br from-acento to-acento-oscuro text-white">
       {/* Corazón gigante de fondo, decorativo. */}
       <HeartPulse className="pointer-events-none absolute -top-16 -right-16 size-80 text-white/5" aria-hidden="true" />
       <div className="contenedor relative grid gap-10 py-20 sm:py-24 lg:grid-cols-[1fr_1.3fr] lg:items-center lg:gap-16">
@@ -75,14 +75,14 @@ const QuizComponent = () => {
             {preguntasTest.map((pregunta, index) => (
               <span
                 key={pregunta.pregunta}
-                className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${index < paso ? 'bg-corazon' : 'bg-tinta/10'}`}
+                className={`h-1.5 flex-1 rounded-full transition-colors duration-500 ${index < paso ? 'bg-acento' : 'bg-tinta/10'}`}
               />
             ))}
           </div>
 
           {!terminado && (
             <div key={paso} className="aparece">
-              <p className="mb-2 text-sm font-semibold text-corazon">
+              <p className="mb-2 text-sm font-semibold text-acento">
                 Pregunta {paso + 1} de {preguntasTest.length}
               </p>
               <h3 ref={headingRef} tabIndex={-1} className="mb-6 text-2xl font-bold outline-none sm:text-3xl">
@@ -94,10 +94,10 @@ const QuizComponent = () => {
                     key={opcion.texto}
                     type="button"
                     onClick={() => responder(opcion)}
-                    className="group al-tocar flex items-center justify-between gap-3 rounded-2xl border-2 border-tinta/10 px-5 py-4 text-left font-medium hover:border-corazon hover:bg-corazon-claro/50 active:border-corazon active:bg-corazon-claro/50"
+                    className="group al-tocar flex items-center justify-between gap-3 rounded-2xl border-2 border-tinta/10 px-5 py-4 text-left font-medium hover:border-acento hover:bg-acento-claro/50 active:border-acento active:bg-acento-claro/50"
                   >
                     {opcion.texto}
-                    <ArrowRight className="size-4 shrink-0 text-corazon opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />
+                    <ArrowRight className="size-4 shrink-0 text-acento opacity-0 transition group-hover:translate-x-0.5 group-hover:opacity-100" aria-hidden="true" />
                   </button>
                 ))}
               </div>
@@ -111,12 +111,12 @@ const QuizComponent = () => {
 
           {resultado && (
             <div key="resultado" className="aparece">
-              <p className="mb-2 text-sm font-semibold text-corazon">Tu resultado</p>
+              <p className="mb-2 text-sm font-semibold text-acento">Tu resultado</p>
               <h3 ref={headingRef} tabIndex={-1} className="mb-4 text-2xl font-bold outline-none sm:text-3xl">
                 {textosResultado[resultado].titulo}
               </h3>
               <p className="mb-4 leading-relaxed text-gris">{textosResultado[resultado].texto}</p>
-              {conAvisoSalud && <p className="mb-6 rounded-2xl bg-corazon-claro p-4 text-sm leading-relaxed">{AVISO_SALUD}</p>}
+              {conAvisoSalud && <p className="mb-6 rounded-2xl bg-acento-claro p-4 text-sm leading-relaxed">{AVISO_SALUD}</p>}
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 {PERSONAS_POR_RESULTADO[resultado].map((persona) => (
                   <ButtonComponent key={persona.nombre} href={obtenerUrlInstagram(persona.instagram)} tone={persona.tono}>

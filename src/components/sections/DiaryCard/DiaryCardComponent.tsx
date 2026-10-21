@@ -21,19 +21,19 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
 
   // #region Renderizado
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-noche/10">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl has-[a:active]:scale-[0.98] border border-tinta/5 bg-white shadow-[0_1px_2px_rgb(0_0_0/0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-tierra/10">
       <div className="overflow-hidden">
         <PhotoComponent
           photo={fotoEntradaDiario(entrada)}
           label={entrada.titulo}
-          tone={Tone.Night}
+          tone={Tone.Earth}
           sizes={CARD_PHOTO_SIZES}
           transitionName={photoTransitionName('diario', entrada.slug)}
           className="aspect-[4/3] rounded-none transition duration-500 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <p className="flex items-center gap-3 text-sm font-medium text-noche">
+        <p className="flex items-center gap-3 text-sm font-medium text-tierra">
           <time dateTime={entrada.fecha}>{formatearFecha(entrada.fecha)}</time>
           <span aria-hidden="true">·</span>
           <span className="inline-flex items-center gap-1">
@@ -42,12 +42,12 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
         </p>
         <h3 className="text-xl font-bold">
           {/* El enlace cubre toda la tarjeta, pero el texto del enlace es solo el título (mejor para lectores de pantalla). */}
-          <Link to={route} onClick={handleClick} className="after:absolute after:inset-0 group-hover:text-noche">
+          <Link to={route} onClick={handleClick} className="after:absolute after:inset-0 group-hover:text-tierra">
             {entrada.titulo}
           </Link>
         </h3>
         <p className="flex-1 leading-relaxed text-gris">{entrada.resumen}</p>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-noche">
+        <span className="inline-flex items-center gap-1 text-sm font-semibold text-tierra">
           Leer <ArrowRight className="size-4 transition group-hover:translate-x-1" aria-hidden="true" />
         </span>
       </div>

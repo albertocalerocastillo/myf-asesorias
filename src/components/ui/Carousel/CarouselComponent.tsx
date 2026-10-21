@@ -52,7 +52,7 @@ const CarouselComponent = ({ label, items, gridClassName }: ICarouselProps) => {
             aria-current={index === activeIndex}
             className="grid size-6 place-items-center"
           >
-            <span className={`block h-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'w-6 bg-corazon' : 'w-2 bg-tinta/20'}`} />
+            <span className={`block h-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'w-6 bg-acento' : 'w-2 bg-tinta/20'}`} />
           </button>
         ))}
       </div>

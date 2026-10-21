@@ -1,8 +1,9 @@
-// Tono de color de cada parte de la web: salvia para Nutrición (Marta), noche para Entrenamiento (Fran).
+// Tono de color de cada parte de la web (colores del logo): oliva para Nutrición (Marta),
+// tierra para Entrenamiento (Fran) y el acento de la marca para las llamadas a la acción.
 export enum Tone {
-  Heart = 'heart',
-  Sage = 'sage',
-  Night = 'night',
+  Accent = 'accent',
+  Olive = 'olive',
+  Earth = 'earth',
   Sand = 'sand',
   Outline = 'outline'
 }

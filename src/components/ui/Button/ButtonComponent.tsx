@@ -6,7 +6,7 @@ import type { IButtonProps } from './IButtonProps';
 
 const BASE_CLASSES = 'al-tocar inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full px-6 py-3.5 font-semibold transition';
 
-const ButtonComponent = ({ to, href, tone = Tone.Heart, className = '', children }: IButtonProps) => {
+const ButtonComponent = ({ to, href, tone = Tone.Accent, className = '', children }: IButtonProps) => {
   // #region Declaraciones
   const classes = `${BASE_CLASSES} ${toneStyles[tone].solid} ${className}`;
   // #endregion

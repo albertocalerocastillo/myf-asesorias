@@ -54,8 +54,8 @@ const RecipeComponent = () => {
                 { icono: Users, valor: formatearRaciones(receta.raciones), etiqueta: 'Raciones' },
                 { icono: ChefHat, valor: marta.nombre, etiqueta: 'Receta de' }
               ].map((dato) => (
-                <div key={dato.etiqueta} className="rounded-2xl bg-salvia-claro px-2 py-4">
-                  <dato.icono className="mx-auto mb-1.5 size-5 text-salvia" aria-hidden="true" />
+                <div key={dato.etiqueta} className="rounded-2xl bg-oliva-claro px-2 py-4">
+                  <dato.icono className="mx-auto mb-1.5 size-5 text-oliva" aria-hidden="true" />
                   <dt className="sr-only">{dato.etiqueta}</dt>
                   <dd className="font-semibold">{dato.valor}</dd>
                 </div>
@@ -66,7 +66,7 @@ const RecipeComponent = () => {
           <PhotoComponent
             photo={fotoReceta(receta)}
             label={receta.titulo}
-            tone={Tone.Sage}
+            tone={Tone.Olive}
             sizes={HEADER_PHOTO_SIZES}
             priority
             transitionName={photoTransitionName('receta', receta.slug)}
@@ -76,9 +76,9 @@ const RecipeComponent = () => {
 
         <CookingModeComponent receta={receta} />
 
-        <div className="mt-14 flex flex-col gap-4 rounded-3xl bg-salvia-claro p-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 rounded-3xl bg-oliva-claro p-7 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-medium">¿Quieres un plan de comidas hecho para ti?</p>
-          <ButtonComponent href={obtenerUrlInstagram(marta.instagram)} tone={Tone.Sage}>
+          <ButtonComponent href={obtenerUrlInstagram(marta.instagram)} tone={Tone.Olive}>
             <InstagramIconComponent /> Escribe a Marta
           </ButtonComponent>
         </div>

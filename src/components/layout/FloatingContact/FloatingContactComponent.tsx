@@ -36,7 +36,7 @@ const FloatingContactComponent = () => {
       href={`#${AppAnchor.Contact}`}
       aria-hidden={!visible}
       tabIndex={visible ? 0 : -1}
-      className={`al-tocar abajo-seguro fixed right-4 left-4 z-30 flex items-center justify-center gap-2 rounded-full bg-corazon px-6 py-4 font-semibold text-white shadow-xl shadow-corazon/30 transition-all duration-300 sm:right-6 sm:left-auto lg:hidden ${
+      className={`al-tocar abajo-seguro fixed right-4 left-4 z-30 flex items-center justify-center gap-2 rounded-full bg-acento px-6 py-4 font-semibold text-white shadow-xl shadow-acento/30 transition-all duration-300 sm:right-6 sm:left-auto lg:hidden ${
         visible ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-24 opacity-0'
       }`}
     >

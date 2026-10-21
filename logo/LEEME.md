@@ -1,14 +1,8 @@
-# Logo M&F Asesorías
+# Logo
 
-| Fichero | Para qué |
-|---|---|
-| `foto-perfil-instagram.png` | Foto de perfil de Instagram (ya con margen para el recorte redondo) |
-| `logo-fondo-oscuro.png` | Publicaciones, historias, WhatsApp |
-| `logo-fondo-claro.png` | Lo mismo, en versión clara |
-| `logo-transparente-para-fondo-oscuro.png` | Poner encima de fotos o fondos oscuros |
-| `logo-transparente-para-fondo-claro.png` | Poner encima de fondos claros (documentos, camisetas claras…) |
-| `icono-transparente.png` | Solo el corazón con los brazos, sin texto |
-| `original-chatgpt.webp` | La imagen original de ChatGPT de la que salen todas |
+`logo-cliente-original.webp` es el logo que tienen Marta y Fran (imagen con efecto relieve).
+De ella salen las versiones de la web en `public/`: `logo-marca.webp` (cabecera),
+`logo-completo.webp` (pie), los iconos y `og-image.png`.
 
-Todas en 1080×1080 px. Las versiones de la web (cabecera, pie, favicon, imagen para compartir)
-están en `public/`.
+PENDIENTE: pedirles el archivo original plano (PNG transparente o SVG) y sustituir esta imagen.
+El logo es oscuro: usarlo siempre sobre fondos claros.

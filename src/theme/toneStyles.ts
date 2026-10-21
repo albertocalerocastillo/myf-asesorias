@@ -11,12 +11,12 @@ interface ToneStyle {
 }
 
 export const toneStyles: Record<Tone, ToneStyle> = {
-  [Tone.Heart]: { solid: 'bg-corazon text-white hover:bg-corazon-oscuro', soft: 'bg-corazon/10', text: 'text-corazon' },
-  [Tone.Sage]: { solid: 'bg-salvia text-white hover:brightness-110', soft: 'bg-salvia-claro', text: 'text-salvia' },
-  [Tone.Night]: { solid: 'bg-noche text-white hover:brightness-125', soft: 'bg-noche-claro', text: 'text-noche' },
+  [Tone.Accent]: { solid: 'bg-acento text-white hover:bg-acento-oscuro', soft: 'bg-acento/10', text: 'text-acento' },
+  [Tone.Olive]: { solid: 'bg-oliva text-white hover:brightness-110', soft: 'bg-oliva-claro', text: 'text-oliva' },
+  [Tone.Earth]: { solid: 'bg-tierra text-white hover:brightness-125', soft: 'bg-tierra-claro', text: 'text-tierra' },
   [Tone.Sand]: { solid: 'bg-arena text-tinta', soft: 'bg-arena', text: 'text-gris' },
   [Tone.Outline]: {
-    solid: 'border border-tinta/20 text-tinta hover:border-corazon hover:text-corazon',
+    solid: 'border border-tinta/20 text-tinta hover:border-acento hover:text-acento',
     soft: 'bg-transparent',
     text: 'text-tinta'
   }

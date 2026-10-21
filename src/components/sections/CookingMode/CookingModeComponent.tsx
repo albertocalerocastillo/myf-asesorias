@@ -26,11 +26,11 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
       {/* Barra del modo cocina. */}
       <div
         className={`mb-10 flex flex-col gap-4 rounded-3xl p-5 transition-colors sm:flex-row sm:items-center sm:justify-between sm:p-6 ${
-          cooking ? 'bg-salvia text-white' : 'border border-salvia/20 bg-salvia-claro'
+          cooking ? 'bg-oliva text-white' : 'border border-oliva/20 bg-oliva-claro'
         }`}
       >
         <div className="flex items-center gap-4">
-          <span className={`grid size-12 shrink-0 place-items-center rounded-2xl ${cooking ? 'bg-white/15' : 'bg-white text-salvia'}`}>
+          <span className={`grid size-12 shrink-0 place-items-center rounded-2xl ${cooking ? 'bg-white/15' : 'bg-white text-oliva'}`}>
             <ChefHat className="size-6" aria-hidden="true" />
           </span>
           <div>
@@ -47,7 +47,7 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
           onClick={() => setCooking(!cooking)}
           aria-pressed={cooking}
           className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full px-5 py-3 font-semibold transition ${
-            cooking ? 'bg-white text-salvia hover:bg-crema' : 'bg-salvia text-white hover:brightness-110'
+            cooking ? 'bg-white text-oliva hover:bg-crema' : 'bg-oliva text-white hover:brightness-110'
           }`}
         >
           {cooking ? <X className="size-4" aria-hidden="true" /> : <MonitorSmartphone className="size-4" aria-hidden="true" />}
@@ -75,17 +75,17 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
                       role="checkbox"
                       aria-checked={checked}
                       onClick={() => setCheckedIngredients(toggleInList(checkedIngredients, index))}
-                      className={`flex w-full items-start gap-3 rounded-xl px-2 py-2.5 text-left transition hover:bg-salvia-claro/60 ${cooking ? 'text-lg' : ''}`}
+                      className={`flex w-full items-start gap-3 rounded-xl px-2 py-2.5 text-left transition hover:bg-oliva-claro/60 ${cooking ? 'text-lg' : ''}`}
                     >
                       <span
                         className={`mt-0.5 grid size-5 shrink-0 place-items-center rounded-md border-2 transition ${
-                          checked ? 'border-salvia bg-salvia text-white' : 'border-tinta/25'
+                          checked ? 'border-oliva bg-oliva text-white' : 'border-tinta/25'
                         }`}
                         aria-hidden="true"
                       >
                         {checked && <Check className="size-3.5" strokeWidth={3} />}
                       </span>
-                      <span className={checked ? 'text-gris line-through decoration-salvia/60' : ''}>{ingrediente}</span>
+                      <span className={checked ? 'text-gris line-through decoration-oliva/60' : ''}>{ingrediente}</span>
                     </button>
                   </li>
                 );
@@ -110,18 +110,18 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
                     aria-checked={done}
                     onClick={() => setDoneSteps(toggleInList(doneSteps, index))}
                     className={`flex w-full gap-5 rounded-2xl p-3 text-left transition sm:p-4 ${
-                      current ? 'bg-white shadow-lg ring-2 ring-salvia' : 'hover:bg-white/70'
+                      current ? 'bg-white shadow-lg ring-2 ring-oliva' : 'hover:bg-white/70'
                     } ${done ? 'opacity-55' : ''}`}
                   >
                     <span
                       className={`titulo grid size-10 shrink-0 place-items-center rounded-full text-lg font-bold transition ${
-                        done ? 'bg-salvia-claro text-salvia' : 'bg-salvia text-white'
+                        done ? 'bg-oliva-claro text-oliva' : 'bg-oliva text-white'
                       }`}
                       aria-hidden="true"
                     >
                       {done ? <Check className="size-5" strokeWidth={3} /> : index + 1}
                     </span>
-                    <span className={`pt-1.5 leading-relaxed ${cooking ? 'text-xl sm:text-2xl' : 'text-lg'} ${done ? 'line-through decoration-salvia/50' : ''}`}>
+                    <span className={`pt-1.5 leading-relaxed ${cooking ? 'text-xl sm:text-2xl' : 'text-lg'} ${done ? 'line-through decoration-oliva/50' : ''}`}>
                       {paso}
                     </span>
                   </button>
@@ -130,7 +130,7 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
             })}
           </ol>
           {cooking && allDone && (
-            <p className="mt-8 rounded-2xl bg-salvia-claro p-5 text-center text-lg font-semibold text-salvia" role="status">
+            <p className="mt-8 rounded-2xl bg-oliva-claro p-5 text-center text-lg font-semibold text-oliva" role="status">
               ¡Listo! Que aproveche 💚
             </p>
           )}
