@@ -11,7 +11,7 @@ const StatComponent = ({ cifra }: { cifra: CifraDTO }) => {
 
   return (
     <div className="flex flex-col items-center gap-2 text-center">
-      <p className="titulo text-6xl font-bold text-corazon-suave sm:text-7xl">
+      <p className="titulo text-6xl font-bold text-acento-suave sm:text-7xl">
         <span ref={ref}>{cifra.valor}</span>
         {cifra.sufijo}
       </p>

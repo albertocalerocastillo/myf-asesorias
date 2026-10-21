@@ -28,7 +28,7 @@ const HeartbeatComponent = ({ className = '', animated = false, pulse = false }:
         vectorEffect="non-scaling-stroke"
         pathLength={PATH_LENGTH}
         className="ecg-pulso [filter:drop-shadow(0_0_6px_currentColor)]"
-        style={{ color: 'var(--color-corazon)' }}
+        style={{ color: 'var(--color-acento)' }}
       />
     )}
   </svg>

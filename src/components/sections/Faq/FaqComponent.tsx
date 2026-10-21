@@ -8,7 +8,7 @@ const FaqComponent = () => (
       <details key={item.pregunta} className="group px-6 sm:px-8">
         <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-lg font-semibold [&::-webkit-details-marker]:hidden">
           {item.pregunta}
-          <Plus className="size-5 shrink-0 text-corazon transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
+          <Plus className="size-5 shrink-0 text-acento transition-transform duration-300 group-open:rotate-45" aria-hidden="true" />
         </summary>
         <p className="-mt-2 pb-6 leading-relaxed text-gris">{item.respuesta}</p>
       </details>

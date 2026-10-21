@@ -17,7 +17,7 @@ export const marta: PersonaDTO = {
   nombre: 'Marta',
   area: 'Nutrición',
   ruta: AppRoute.Nutrition,
-  tono: Tone.Sage,
+  tono: Tone.Olive,
   // PENDIENTE.
   instagram: 'usuario_de_marta',
   // PENDIENTE.
@@ -41,7 +41,7 @@ export const fran: PersonaDTO = {
   nombre: 'Fran',
   area: 'Entrenamiento',
   ruta: AppRoute.Training,
-  tono: Tone.Night,
+  tono: Tone.Earth,
   // PENDIENTE.
   instagram: 'usuario_de_fran',
   // PENDIENTE.

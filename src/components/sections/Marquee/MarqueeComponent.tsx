@@ -6,7 +6,7 @@ import { frasesCinta } from '../../../data/servicio';
 const COPIES = [false, true];
 
 const MarqueeComponent = () => (
-  <div className="cinta-contenedor overflow-hidden border-y border-tinta/10 bg-corazon py-5 text-white sm:py-6">
+  <div className="cinta-contenedor overflow-hidden border-y border-tinta/10 bg-acento py-5 text-white sm:py-6">
     <div className="cinta">
       {COPIES.map((isCopy) => (
         <ul key={`${isCopy}`} aria-hidden={isCopy} className="flex shrink-0 items-center">

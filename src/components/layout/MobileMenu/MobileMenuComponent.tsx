@@ -26,7 +26,7 @@ const MobileMenuComponent = ({ open, onClose }: IMobileMenuProps) => {
 
   const getLinkClasses = ({ isActive }: { isActive: boolean }): string =>
     `titulo flex items-center justify-between rounded-2xl px-5 py-4 text-3xl font-semibold al-tocar ${
-      isActive ? 'bg-corazon-claro text-corazon' : 'text-tinta active:bg-arena'
+      isActive ? 'bg-acento-claro text-acento' : 'text-tinta active:bg-arena'
     }`;
 
   const itemClasses = `transition-[opacity,transform] duration-500 ease-[var(--ease-suave)] ${open ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'}`;
@@ -71,7 +71,7 @@ const MobileMenuComponent = ({ open, onClose }: IMobileMenuProps) => {
         open ? 'visible' : 'invisible'
       }`}
     >
-      <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full text-corazon/10" />
+      <HeartbeatComponent className="pointer-events-none absolute inset-x-0 top-1/2 h-24 w-full text-acento/10" />
 
       <ul className="relative space-y-1">
         {MENU_LINKS.map((link, index) => (
@@ -94,7 +94,7 @@ const MobileMenuComponent = ({ open, onClose }: IMobileMenuProps) => {
         <a
           href={`#${AppAnchor.Contact}`}
           onClick={onClose}
-          className="al-tocar flex items-center justify-center gap-2 rounded-full bg-corazon px-6 py-4 text-lg font-semibold text-white shadow-lg shadow-corazon/25"
+          className="al-tocar flex items-center justify-center gap-2 rounded-full bg-acento px-6 py-4 text-lg font-semibold text-white shadow-lg shadow-acento/25"
         >
           Cuéntanos tu caso <ArrowRight className="size-5" aria-hidden="true" />
         </a>

@@ -9,7 +9,7 @@ import { useScrolled } from '../../../hooks/useScrolled';
 import { marca } from '../../../data/equipo';
 
 const SCROLL_OFFSET = 12;
-const LOGO_ICON = '/logo-icono.webp';
+const LOGO_MARK = '/logo-marca.webp';
 // Cada raya del botón de menú: arriba y abajo giran para formar la X, la del medio desaparece.
 const BURGER_LINE = 'absolute left-1/2 h-0.5 w-6 -translate-x-1/2 rounded-full bg-tinta transition-all duration-300 ease-[var(--ease-suave)]';
 
@@ -19,8 +19,8 @@ const HeaderComponent = () => {
   const scrolled = useScrolled(SCROLL_OFFSET);
 
   const getDesktopLinkClasses = ({ isActive }: { isActive: boolean }): string =>
-    `relative py-1 font-medium transition-colors hover:text-corazon after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-corazon after:transition-transform ${
-      isActive ? 'text-corazon after:scale-x-100' : 'text-tinta after:scale-x-0'
+    `relative py-1 font-medium transition-colors hover:text-acento after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-acento after:transition-transform ${
+      isActive ? 'text-acento after:scale-x-100' : 'text-tinta after:scale-x-0'
     }`;
 
   // Estable entre renderizados: el menú la usa dentro de un efecto.
@@ -37,7 +37,7 @@ const HeaderComponent = () => {
       >
         <div className="contenedor flex h-16 items-center justify-between lg:h-18">
           <Link to={AppRoute.Home} className="group al-tocar flex items-center gap-2.5" onClick={closeMenu} aria-label={`${marca.nombre}, ir al inicio`}>
-            <img src={LOGO_ICON} alt="" width={40} height={40} className="size-9 rounded-xl transition group-hover:scale-105 lg:size-10" />
+            <img src={LOGO_MARK} alt="" width={117} height={88} className="h-10 w-auto transition group-hover:scale-105 lg:h-11" />
             <span className="titulo text-lg font-bold whitespace-nowrap lg:text-xl">{marca.nombre}</span>
           </Link>
 
@@ -49,7 +49,7 @@ const HeaderComponent = () => {
             ))}
             <a
               href={`#${AppAnchor.Contact}`}
-              className="rounded-full bg-corazon px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-corazon-oscuro"
+              className="rounded-full bg-acento px-5 py-2.5 font-semibold text-white shadow-sm transition hover:bg-acento-oscuro"
             >
               Hablemos
             </a>
@@ -69,7 +69,7 @@ const HeaderComponent = () => {
           </button>
         </div>
         {/* Progreso de lectura de la página (solo en navegadores que lo soportan, ver theme.css). */}
-        <span aria-hidden="true" className="barra-progreso absolute inset-x-0 bottom-0 h-0.5 bg-corazon" />
+        <span aria-hidden="true" className="barra-progreso absolute inset-x-0 bottom-0 h-0.5 bg-acento" />
       </header>
 
       <MobileMenuComponent open={menuOpen} onClose={closeMenu} />

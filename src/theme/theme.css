@@ -1,23 +1,24 @@
 @import "tailwindcss";
 
-/* Paleta: crema cálido de fondo, coral "corazón" como acento,
-   verde salvia para Nutrición (Marta) y azul noche para Entrenamiento (Fran).
-   Coral, salvia y noche cumplen contraste AA (4,5:1) con texto blanco encima y como texto sobre crema. */
+/* Paleta sacada del logo: fondo crema, verde oliva de la marca como acento, oliva más vivo para
+   Nutrición (Marta) y tierra tostada para Entrenamiento (Fran). El tostado del logo (#c7ac8f) se usa
+   solo en detalles y sobre fondo oscuro; para texto y botones va una versión más oscura.
+   Acento, oliva y tierra cumplen contraste AA (4,5:1) con texto blanco encima y como texto sobre crema. */
 @theme {
   --font-sans: "Inter Variable", system-ui, sans-serif;
   --font-titulo: "Fraunces Variable", Georgia, serif;
-  --color-crema: #faf6f0;
-  --color-arena: #f1e9dd;
-  --color-tinta: #1c211e;
-  --color-gris: #565d58;
-  --color-corazon: #c03f17;
-  --color-corazon-oscuro: #9c3210;
-  --color-corazon-claro: #fbe4da;
-  --color-corazon-suave: #f08a63;
-  --color-salvia: #477546;
-  --color-salvia-claro: #e3eee1;
-  --color-noche: #1f3a5f;
-  --color-noche-claro: #e1e8f2;
+  --color-crema: #faf6ef;
+  --color-arena: #f0e8db;
+  --color-tinta: #2d3021;
+  --color-gris: #5c5f4f;
+  --color-acento: #46512b;
+  --color-acento-oscuro: #343c1f;
+  --color-acento-claro: #e9ebdc;
+  --color-acento-suave: #c7ac8f;
+  --color-oliva: #55622f;
+  --color-oliva-claro: #e6ead6;
+  --color-tierra: #7d6145;
+  --color-tierra-claro: #f1e6d8;
   --animate-latido: latido 1.6s ease-in-out infinite;
   --ease-suave: cubic-bezier(.2, .7, .2, 1);
 }
@@ -37,8 +38,8 @@
   body { background: var(--color-crema); color: var(--color-tinta); -webkit-font-smoothing: antialiased; overflow-x: clip; }
   h1, h2, h3, .titulo { font-family: var(--font-titulo); letter-spacing: -0.02em; text-wrap: balance; }
   p { text-wrap: pretty; }
-  ::selection { background: var(--color-corazon-claro); }
-  :focus-visible { outline: 3px solid var(--color-corazon); outline-offset: 3px; border-radius: 6px; }
+  ::selection { background: var(--color-acento-claro); }
+  :focus-visible { outline: 3px solid var(--color-acento); outline-offset: 3px; border-radius: 6px; }
 }
 
 /* Texto largo (historias, recetas, entradas del diario). En una capa para que las utilidades
@@ -69,8 +70,8 @@
 /* Fondo cálido con dos manchas de color suaves, sin cargar imágenes. */
 .fondo-calido {
   background:
-    radial-gradient(60rem 30rem at 90% -10%, color-mix(in srgb, var(--color-corazon) 9%, transparent), transparent 60%),
-    radial-gradient(40rem 25rem at -10% 40%, color-mix(in srgb, var(--color-salvia) 10%, transparent), transparent 60%);
+    radial-gradient(60rem 30rem at 90% -10%, color-mix(in srgb, var(--color-acento) 9%, transparent), transparent 60%),
+    radial-gradient(40rem 25rem at -10% 40%, color-mix(in srgb, var(--color-oliva) 10%, transparent), transparent 60%);
 }
 
 /* ─── Aparición al hacer scroll ───────────────────────────────────────────

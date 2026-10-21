@@ -40,7 +40,7 @@ const DiaryEntryComponent = () => {
       <article className="mx-auto max-w-3xl px-5 pt-6 pb-16 sm:px-8 sm:pt-10">
         <BreadcrumbsComponent items={buildDiaryBreadcrumbs(entrada)} />
         <header className="mb-10">
-          <p className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium text-noche">
+          <p className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium text-tierra">
             <time dateTime={entrada.fecha}>{formatearFecha(entrada.fecha)}</time>
             <span aria-hidden="true">·</span>
             <span>por {fran.nombre}</span>
@@ -56,7 +56,7 @@ const DiaryEntryComponent = () => {
         <PhotoComponent
           photo={fotoEntradaDiario(entrada)}
           label={entrada.titulo}
-          tone={Tone.Night}
+          tone={Tone.Earth}
           sizes={HEADER_PHOTO_SIZES}
           priority
           transitionName={photoTransitionName('diario', entrada.slug)}
@@ -68,11 +68,11 @@ const DiaryEntryComponent = () => {
           ))}
         </div>
 
-        <aside className="mt-14 flex flex-col gap-5 rounded-3xl bg-noche-claro p-7 sm:flex-row sm:items-center">
+        <aside className="mt-14 flex flex-col gap-5 rounded-3xl bg-tierra-claro p-7 sm:flex-row sm:items-center">
           <PhotoComponent
             photo={fotoPersona(fran)}
             label={fran.nombre}
-            tone={Tone.Night}
+            tone={Tone.Earth}
             sizes={AVATAR_SIZES}
             className="size-20 shrink-0 rounded-full bg-white/70 text-[0px]"
           />
@@ -80,7 +80,7 @@ const DiaryEntryComponent = () => {
             <p className="titulo text-xl font-bold">Escrito por {fran.nombre}</p>
             <p className="text-gris">{fran.frase}</p>
           </div>
-          <ButtonComponent href={obtenerUrlInstagram(fran.instagram)} tone={Tone.Night}>
+          <ButtonComponent href={obtenerUrlInstagram(fran.instagram)} tone={Tone.Earth}>
             <InstagramIconComponent /> Escríbele
           </ButtonComponent>
         </aside>
