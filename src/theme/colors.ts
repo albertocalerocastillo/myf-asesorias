@@ -5,6 +5,10 @@ export const BRAND_COLORS = {
   oliva: '#55622f',
   tierra: '#7d6145',
   blanco: '#ffffff',
+  crema: '#faf6ef',
+  acentoSuave: '#c7ac8f',
   // Gris de partida del texto que se "enciende": contraste 3,1:1 sobre crema (mínimo AA para letra grande).
-  apagado: '#8c8d80'
+  apagado: '#8c8d80',
+  // Igual, pero para fondos de color claro (oliva y tierra claros): 3,3:1.
+  apagadoFuerte: '#7d7f71'
 };
