@@ -2,6 +2,7 @@
 // Al pulsarla, la foto "vuela" hasta la cabecera de la entrada (View Transitions).
 import { Link } from 'react-router-dom';
 import { ArrowRight, Clock } from 'lucide-react';
+import MetaLineComponent from '../../ui/MetaLine/MetaLineComponent';
 import PhotoComponent from '../../ui/Photo/PhotoComponent';
 import { buildDiaryRoute } from '../../../enums/AppRoute';
 import { Tone } from '../../../enums/Tone';
@@ -33,12 +34,17 @@ const DiaryCardComponent = ({ entrada }: IDiaryCardProps) => {
         />
       </div>
       <div className="flex flex-1 flex-col gap-3 p-6">
-        <p className="flex items-center gap-3 text-sm font-medium text-tierra">
-          <time dateTime={entrada.fecha}>{formatearFecha(entrada.fecha)}</time>
-          <span aria-hidden="true">·</span>
-          <span className="inline-flex items-center gap-1">
-            <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min
-          </span>
+        <p className="text-sm font-medium text-tierra">
+          <MetaLineComponent
+            items={[
+              <time key="fecha" dateTime={entrada.fecha}>
+                {formatearFecha(entrada.fecha)}
+              </time>,
+              <span key="minutos" className="inline-flex items-center gap-1">
+                <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min
+              </span>
+            ]}
+          />
         </p>
         <h3 className="text-2xl leading-tight">
           {/* El enlace cubre toda la tarjeta, pero el texto del enlace es solo el título (mejor para lectores de pantalla). */}

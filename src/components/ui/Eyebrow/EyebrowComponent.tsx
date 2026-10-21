@@ -1,8 +1,12 @@
 // Antetítulo con el estilo del lema del logo: mayúsculas espaciadas entre dos rayas finas.
+import MetaLineComponent from '../MetaLine/MetaLineComponent';
 import type { IEyebrowProps } from './IEyebrowProps';
+
+const SEPARATOR = ' · ';
 
 const EyebrowComponent = ({ text, centered = false, inverted = false, className = '' }: IEyebrowProps) => {
   // #region Declaraciones
+  const parts = text.split(SEPARATOR);
   const lineClasses = `h-px w-8 shrink-0 ${inverted ? 'bg-acento-suave/60' : 'bg-acento-suave'}`;
   // #endregion
 
@@ -14,7 +18,7 @@ const EyebrowComponent = ({ text, centered = false, inverted = false, className 
       } ${className}`}
     >
       <span aria-hidden="true" className={lineClasses} />
-      {text}
+      {parts.length > 1 ? <MetaLineComponent items={parts} className="min-w-0" /> : text}
       {centered && <span aria-hidden="true" className={lineClasses} />}
     </p>
   );
