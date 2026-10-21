@@ -8,6 +8,10 @@ import { SPRING_SOFT } from '../../../theme/animation';
 import type { IExpandingPhotoProps } from './IExpandingPhotoProps';
 
 const PHOTO_SIZES = '100vw';
+// Momento del recorrido (0-1) en el que la foto ya ocupa la pantalla entera, sin esquinas.
+const FULL_AT = 0.7;
+const ARCH_RADIUS_PX = 400;
+const BOTTOM_RADIUS_PX = 32;
 
 const ExpandingPhotoComponent = ({ photo, label, tone = Tone.Olive, children }: IExpandingPhotoProps) => {
   // #region Declaraciones
@@ -15,10 +19,11 @@ const ExpandingPhotoComponent = ({ photo, label, tone = Tone.Olive, children }: 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
   const progress = useSpring(scrollYProgress, SPRING_SOFT);
   // Recorte: de un arco centrado (márgenes grandes y esquinas muy redondas) a la pantalla entera.
-  const insetX = useTransform(progress, [0, 0.7], [28, 0]);
-  const insetY = useTransform(progress, [0, 0.7], [14, 0]);
-  const radius = useTransform(progress, [0, 0.7], [400, 0]);
-  const clipPath = useMotionTemplate`inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${radius}px ${radius}px 32px 32px)`;
+  const insetX = useTransform(progress, [0, FULL_AT], [28, 0]);
+  const insetY = useTransform(progress, [0, FULL_AT], [14, 0]);
+  const topRadius = useTransform(progress, [0, FULL_AT], [ARCH_RADIUS_PX, 0]);
+  const bottomRadius = useTransform(progress, [0, FULL_AT], [BOTTOM_RADIUS_PX, 0]);
+  const clipPath = useMotionTemplate`inset(${insetY}% ${insetX}% ${insetY}% ${insetX}% round ${topRadius}px ${topRadius}px ${bottomRadius}px ${bottomRadius}px)`;
   const photoScale = useTransform(progress, [0, 1], [1.25, 1]);
   const contentOpacity = useTransform(progress, [0.6, 0.85], [0, 1]);
   const contentY = useTransform(progress, [0.6, 0.85], [40, 0]);
@@ -26,8 +31,10 @@ const ExpandingPhotoComponent = ({ photo, label, tone = Tone.Olive, children }: 
 
   // #region Renderizado
   return (
-    <div ref={ref} className="relative h-[160vh] sm:h-[200vh]">
-      <div className="sticky top-0 h-svh overflow-hidden">
+    <div ref={ref} data-sin-boton-flotante className="relative h-[160vh] sm:h-[200vh]">
+      {/* Altura "grande" de la pantalla (lvh): en el móvil, cuando la barra del navegador se esconde,
+          la foto sigue llegando hasta abajo del todo. */}
+      <div className="sticky top-0 h-lvh overflow-hidden">
         <m.div className="absolute inset-0" style={{ clipPath }}>
           <m.div className="size-full" style={{ scale: photoScale }}>
             <PhotoComponent photo={photo} label={label} tone={tone} sizes={PHOTO_SIZES} className="size-full rounded-none" />
