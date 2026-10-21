@@ -4,6 +4,7 @@ import BreadcrumbsComponent from '../../components/ui/Breadcrumbs/BreadcrumbsCom
 import ButtonComponent from '../../components/ui/Button/ButtonComponent';
 import CarouselComponent from '../../components/ui/Carousel/CarouselComponent';
 import InstagramIconComponent from '../../components/ui/Icons/InstagramIconComponent';
+import MetaLineComponent from '../../components/ui/MetaLine/MetaLineComponent';
 import PhotoComponent from '../../components/ui/Photo/PhotoComponent';
 import ShareButtonComponent from '../../components/ui/ShareButton/ShareButtonComponent';
 import DiaryCardComponent from '../../components/sections/DiaryCard/DiaryCardComponent';
@@ -40,14 +41,18 @@ const DiaryEntryComponent = () => {
       <article className="mx-auto max-w-3xl px-5 pt-6 pb-16 sm:px-8 sm:pt-10">
         <BreadcrumbsComponent items={buildDiaryBreadcrumbs(entrada)} />
         <header className="mb-10">
-          <p className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm font-medium text-tierra">
-            <time dateTime={entrada.fecha}>{formatearFecha(entrada.fecha)}</time>
-            <span aria-hidden="true">·</span>
-            <span>por {fran.nombre}</span>
-            <span aria-hidden="true">·</span>
-            <span className="inline-flex items-center gap-1">
-              <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min de lectura
-            </span>
+          <p className="mb-4 text-sm font-medium text-tierra">
+            <MetaLineComponent
+              items={[
+                <time key="fecha" dateTime={entrada.fecha}>
+                  {formatearFecha(entrada.fecha)}
+                </time>,
+                <span key="autor">por {fran.nombre}</span>,
+                <span key="minutos" className="inline-flex items-center gap-1">
+                  <Clock className="size-3.5" aria-hidden="true" /> {calcularMinutosLectura(entrada)} min de lectura
+                </span>
+              ]}
+            />
           </p>
           <h1 className="titulo-grande mb-6 text-5xl leading-[1.02] sm:text-7xl">{entrada.titulo}</h1>
           <p className="mb-6 text-xl leading-relaxed text-gris sm:text-2xl">{entrada.resumen}</p>
