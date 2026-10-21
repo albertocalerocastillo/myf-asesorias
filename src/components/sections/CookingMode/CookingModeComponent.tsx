@@ -60,7 +60,7 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
         <aside className="md:sticky md:top-24 md:self-start">
           <div className="rounded-3xl border border-tinta/10 bg-white p-6 sm:p-7">
             <div className="mb-5 flex items-baseline justify-between gap-4">
-              <h2 className="text-2xl font-bold">Ingredientes</h2>
+              <h2 className="text-2xl">Ingredientes</h2>
               <span className="text-sm text-gris">
                 {checkedIngredients.length}/{receta.ingredientes.length}
               </span>
@@ -97,7 +97,7 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
 
         {/* #region Pasos */}
         <section>
-          <h2 className="mb-6 text-2xl font-bold">Preparación</h2>
+          <h2 className="mb-6 text-2xl">Preparación</h2>
           <ol className="space-y-4">
             {receta.pasos.map((paso, index) => {
               const done = doneSteps.includes(index);
@@ -114,7 +114,7 @@ const CookingModeComponent = ({ receta }: ICookingModeProps) => {
                     } ${done ? 'opacity-55' : ''}`}
                   >
                     <span
-                      className={`titulo grid size-10 shrink-0 place-items-center rounded-full text-lg font-bold transition ${
+                      className={`titulo grid size-10 shrink-0 place-items-center rounded-full text-lg transition ${
                         done ? 'bg-oliva-claro text-oliva' : 'bg-oliva text-white'
                       }`}
                       aria-hidden="true"
